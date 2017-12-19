@@ -1,13 +1,13 @@
 var ctx = document.getElementById('item_chart').getContext('2d');
 Chart.defaults.global.elements.line.fill = false;
-Chart.defaults.global.legend.display = false;
+Chart.defaults.global.legend.display = true;
 Chart.defaults.global.animation.duration = 500;
 
 $(document).ready(function() {
     var dataUrl = $('#data-url').attr("data-name");
     $.get(dataUrl, function(data) {
         dataset = {
-            label: data.label,
+            label: "Consumo medio",
             borderColor: data.color,
             data: data.data,
         }
@@ -43,7 +43,7 @@ var chart = new Chart(ctx, {
                 {
                     scaleLabel: {
                         display: true,
-                        labelString: "Consumo medio (L/100 km)",
+                        labelString: "L/100 km",
                     }
                 }
             ]

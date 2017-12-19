@@ -1,13 +1,13 @@
 var ctx = document.getElementById('item_chart').getContext('2d');
 Chart.defaults.global.elements.line.fill = false;
-Chart.defaults.global.legend.display = false;
+Chart.defaults.global.legend.display = true;
 Chart.defaults.global.animation.duration = 500;
 
 $(document).ready(function() {
     var dataUrl = $('#data-url').attr("data-name");
     $.get(dataUrl, function(data) {
         dataset = {
-            //label: data.label,
+            label: "Gasto mensual",
             borderColor: data.color,
             data: data.data,
         }
@@ -58,11 +58,10 @@ var chart = new Chart(ctx, {
                     type: "linear",
                     position: 'left',
                     ticks: {
-                        min: 0
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: "Euros mensuales",
+                        labelString: "eur/mes",
                     }
                 }
             ]

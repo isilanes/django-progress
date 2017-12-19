@@ -7,7 +7,8 @@ $(document).ready(function() {
     var dataUrl = $('#data-url').attr("data-name");
     $.get(dataUrl, function(data) {
         dataset = {
-            label: data.label,
+            //label: data.label,
+            label: "Autonomía",
             borderColor: data.color,
             data: data.data,
         }
@@ -43,7 +44,7 @@ var chart = new Chart(ctx, {
                 {
                     scaleLabel: {
                         display: true,
-                        labelString: "Autonomía (km/repostaje)",
+                        labelString: "km/repostaje",
                     }
                 }
             ]
