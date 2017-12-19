@@ -9,7 +9,7 @@ tail -n 0 -f /srv/logs/*.log &
 
 # Start Gunicorn processes
 echo Starting Gunicorn...
-exec gunicorn progress.wsgi:application \
+exec gunicorn WebProgress.wsgi:application \
     --name WebProgress \
     --bind 0.0.0.0:8000 \
     --workers 3 \
