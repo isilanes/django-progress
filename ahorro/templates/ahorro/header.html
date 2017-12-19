@@ -10,7 +10,7 @@
 <table>
     <tr>
       <td><a href="/"><img src="{% static "ahorro/icons/home.png" %}" alt="default" style="width: 64px;" /></a></td>
-      <td><a href="{% url 'ahorro:index' %}"><img src="{% static "ahorro/icons/main.png" %}" alt="default" style="width: 64px;" /></a></td>
+      <td><a href="{% url 'ahorro:index' %}"><img src="{% static "ahorro/icons/ahorro.png" %}" alt="default" style="width: 64px;" /></a></td>
       {% for account in account_list %}
       <td>
           <a href="{% url 'ahorro:plot_item' account.name %}">
