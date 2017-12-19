@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+{% include "gasolina/header.html" %}
+
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="Submit" />
+                        <p></p>
+                    </form>
+                </tr>
+            </table>
+        </td>
+        <td width="80%"><canvas id="item_chart"></canvas></td>
+    </tr>
+</table>
+
+<meta id="data-url" data-name="{% url 'gasolina:item_data' item %}">
+
+{% with "gasolina/js/"|add:item|add:".js" as chartjs %}
+    <script src="{% static chartjs %}"></script>
+{% endwith %}
