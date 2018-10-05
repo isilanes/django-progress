@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Classes:
 class TimeInstant(models.Model):
     """A datetime, an instant in time."""
@@ -15,13 +16,13 @@ class TimeInstant(models.Model):
 
         return sum([a.value for a in Amount.objects.filter(when=self)])
 
-    
     # Special methods:
     def __unicode__(self):
         return self.__str__()
 
     def __str__(self):
         return self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+
 
 class Account(models.Model):
     """The configuration parameters for an account."""
@@ -37,12 +38,13 @@ class Account(models.Model):
     def __str__(self):
         return self.name
 
+
 class Amount(models.Model):
     """An amount of time (for a given Account, on a given TimeInstant."""
 
     value = models.FloatField("Amount", default=0.0)
-    when = models.ForeignKey(TimeInstant)
-    account = models.ForeignKey(Account)
+    when = models.ForeignKey(TimeInstant, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     # Special methods:
     def __unicode__(self):

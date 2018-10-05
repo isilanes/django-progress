@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect
 
 # Our libs:
 from ahorro.forms import AmountForm
-from ahorro.models import  Amount, TimeInstant, Account
+from ahorro.models import Amount, TimeInstant, Account
+
 
 # Index views:
 def index(request):

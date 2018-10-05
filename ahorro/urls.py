@@ -1,17 +1,22 @@
 # Django libs:
-from django.conf.urls import url
+from django.urls import path
 
 # Our web libs:
-from ahorro import views
+from . import views
 
-# URL definitions:
+
+# Constants:
+app_name = "ahorro"
+
+
+# URL patterns:
 urlpatterns = [
     # Index:
-    url(r'^$', views.index, name='index'),
+    path('', views.index, name='index'),
 
     # Single plots:
-    url(r'^plot/(?P<item>.+)/$', views.plot_item, name='plot_item'),
+    path('plot/<item>', views.plot_item, name='plot_item'),
 
     # Data URLs:
-    url(r'^item_data/(?P<item>.+)/$', views.item_data, name='item_data'),
+    path('item_data/<item>', views.item_data, name='item_data'),
 ]
