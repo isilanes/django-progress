@@ -1,9 +1,5 @@
-<head>
-    {% include "books/header.html" %}
-    {% include "books/bokeh_header.html" %}
-</head>
-
-<body>
+{% include "books/header.html" %}
+{% include "books/bokeh_header.html" %}
 
 <div id="banner">
     <div id="book-head">
@@ -11,8 +7,11 @@
     </div>
 </div>
 
+
 <div id="main-content">
-    <p><a href="{% url 'books:index' %}">Volver al índice</a></p>
+
+    {% include "books/top_menu.html" %}
+
     <br>
 
     <table>
@@ -53,5 +52,3 @@
         </tr>
     </table>
 </div>
-
-</body>

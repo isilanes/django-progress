@@ -59,7 +59,10 @@ class State(object):
     # Public properties:
     @property
     def pages_per_book(self):
-        return self.pages_read / self.books_read
+        try:
+            return self.pages_read / self.books_read
+        except ZeroDivisionError:
+            return 0
 
     @property
     def pages_read(self):

@@ -2,17 +2,14 @@
 
 <div id="banner">
     <div id="book-head">
-        Book list
+        Índice
     </div>
 </div>
 
 <div id="main-content">
 
-<p>
-    <a href="{% url 'books:stats' 2018 %}">Stats 2018</a>
-</p>
+{% include "books/top_menu.html" %}
 
-<br>
 
 <h2>Leyendo</h2>
 
@@ -43,3 +40,5 @@
     </tr>
     {% endfor %}
 </table>
+
+</div>
