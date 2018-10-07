@@ -3,6 +3,5 @@
     "DEBUG": true,
     "DBFILE": "progress.db",
     "ALLOWED_HOSTS": ["localhost"],
-    "MAIN_INDEX": "main_index.html",
-    "MY_INSTALLED_APPS": ["gasolina", "ahorro"]
+    "MY_INSTALLED_APPS": ["gasolina", "ahorro", "books"]
 }

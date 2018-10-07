@@ -108,7 +108,4 @@ USE_TZ = True
 
 # Static files:
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# Site variables:
-MAIN_INDEX = J["MAIN_INDEX"]

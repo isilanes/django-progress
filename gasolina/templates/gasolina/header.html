@@ -1,32 +1,38 @@
-{% load staticfiles %}
+{% load static %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="{% static 'gasolina/style.css' %}" />
-<link rel="shortcut icon" type="image/png" href={% static "gasolina/icons/favicon.png" %}/>
+    <link rel="stylesheet" type="text/css" href="{% static 'gasolina/style.css' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'gasolina/icons/favicon.png' %}" />
+</head>
+
+<body>
 
 <table>
   <tr>
-      <td><a href="/"><img src="{% static "gasolina/icons/home.png" %}" alt="default" style="width: 64px;" /></a></td>
-      <td><a href="{% url 'gasolina:index' %}"><img src="{% static "gasolina/icons/gasolina.png" %}" alt="default" style="width: 64px;" /></a></td>
+      <td><a href="/"><img src="{% static 'gasolina/icons/home.png' %}" alt="default" style="width: 64px;" /></a></td>
+      <td><a href="{% url 'gasolina:index' %}"><img src="{% static 'gasolina/icons/gasolina_logo.png' %}"
+                                                    alt="default" style="width: 64px;" /></a></td>
       <td>
-          <a href="{% url 'gasolina:plot_item' "intake" %}">
-              <img src="{% static "gasolina/icons/intake.png" %}" alt="default" style="width: 64px;" /></a>
+          <a href="{% url 'gasolina:plot_item' 'intake' %}">
+              <img src="{% static 'gasolina/icons/intake.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
       <td>
-          <a href="{% url 'gasolina:plot_item' "range" %}">
-              <img src="{% static "gasolina/icons/range.png" %}" alt="default" style="width: 64px;" /></a>
+          <a href="{% url 'gasolina:plot_item' 'range' %}">
+              <img src="{% static 'gasolina/icons/range.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
       <td>
-          <a href="{% url 'gasolina:plot_item' "kms_per_year" %}">
-              <img src="{% static "gasolina/icons/distance.png" %}" alt="default" style="width: 64px;" /></a>
+          <a href="{% url 'gasolina:plot_item' 'kms_per_year' %}">
+              <img src="{% static 'gasolina/icons/distance.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
       <td>
-          <a href="{% url 'gasolina:plot_item' "euros_per_month" %}">
-              <img src="{% static "gasolina/icons/euros.png" %}" alt="default" style="width: 64px;" /></a>
+          <a href="{% url 'gasolina:plot_item' 'euros_per_month' %}">
+              <img src="{% static 'gasolina/icons/euros.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
-  </td>
+  </tr>
 </table>
 
+</body>
