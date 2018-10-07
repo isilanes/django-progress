@@ -1,7 +1,7 @@
-{% load staticfiles %}
+{% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'gasolina/style.css' %}" />
-<link rel="shortcut icon" type="image/png" href={% static "gasolina/icons/favicon.png" %}/>
+<link rel="shortcut icon" type="image/png" href="{% static 'gasolina/icons/{{sp}}favicon.png' %}" />
 
 <div id="banner">
   <div id="banner-content">Progresos</div>
@@ -17,8 +17,8 @@
 
 <table>
     <tr>
-        <td><a href="gasolina/"><img src="{% static "gasolina/icons/gasolina.png" %}" alt="gasolina" style="width: 200px;" /></a></td>
-        <td><a href="ahorro/"><img src="{% static "ahorro/icons/ahorro.png" %}" alt="ahorro" style="width: 200px;" /></a></td>
+        <td><a href="gasolina/"><img src="{% static 'gasolina/icons/gasolina.png' %}" alt="gasolina" style="width: 200px;" /></a></td>
+        <td><a href="ahorro/"><img src="{% static 'ahorro/icons/ahorro.png' %}" alt="ahorro" style="width: 202px;" /></a></td>
     </tr>
 </table>
 
