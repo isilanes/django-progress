@@ -16,6 +16,10 @@ LINKS = {
         "free": "static-free",
         "nonfree": "static-nonfree",
     },
+    os.path.join("ahorro", "static"): {
+        "free": "static-free",
+        "nonfree": "static-nonfree",
+    },
 }
 
 
