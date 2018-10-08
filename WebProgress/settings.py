@@ -2,26 +2,32 @@
 import os
 import json
 
+# Our libs:
+from . import core
+
+
 # You can specify multiple configuration files to be checked in order.
 # The first one found will be used.
 try_confs = [
-    #os.path.join(os.environ["HOME"], ".WebProgress.json"),
+    os.environ.get("DJANGO_PROGRESS_CONF", None),
+    os.path.join(os.environ["HOME"], ".WebProgress.json"),
     os.path.join("conf", "WebProgress.json"),
 ]
 
+
 for conf in try_confs:
-    try:
+    if conf and os.path.isfile(conf):
         with open(conf, 'r') as f:
             J = json.load(f)
         break
-    except:
-        continue
+
+# Free or non-free version?:
+core.mk_links(free=J.get("FREE", True))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = J['SECRET_KEY']
@@ -30,8 +36,7 @@ SECRET_KEY = J['SECRET_KEY']
 DEBUG = J["DEBUG"]
 ALLOWED_HOSTS = J["ALLOWED_HOSTS"]
 
-# Application definition
-
+# Application definition:
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ] + J.get("MY_INSTALLED_APPS", [])
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -6,4 +6,5 @@ backup
 .idea
 *nonfree*
 gasolina/static
+books/static
 WebProgress/templates/main_index.html
