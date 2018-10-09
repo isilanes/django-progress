@@ -114,7 +114,7 @@ class BookStartEvent(Event):
 
     # Special methods:
     def __str__(self):
-        return "Book started"
+        return f"'{self.book}' started"
 
     def __unicode__(self):
         return self.__str__()

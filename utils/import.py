@@ -2,7 +2,9 @@
 import os
 import sys
 import json
+import pytz
 import django
+from datetime import datetime
 
 # Python stuff:
 from django.core.exceptions import ObjectDoesNotExist
@@ -11,7 +13,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebProgress.settings")
 django.setup()
 
 # Our libs:
-from books.models import Author, Book
+from books.models import Author, Book, BookStartEvent
 
 
 # Functions:
@@ -50,7 +52,25 @@ def import_books(in_fn="books.json"):
         book.save()
 
 
+def import_book_start_events(in_fn="book_start_events.json"):
+    with open(in_fn) as f:
+        events = json.load(f)
+
+    for k, val in events.items():
+        # If already there, overwrite:
+        try:
+            event = BookStartEvent.objects.get(pk=k)
+        except ObjectDoesNotExist:
+            event = BookStartEvent(pk=k)
+        event.book = Book.objects.get(pk=val["book_pk"])
+        event.when = datetime.strptime(val["when"], "%Y-%m-%d %H:%M:%S").astimezone(pytz.timezone("Europe/Madrid"))
+        msg = f"Imported [EVENT] {event}"
+        print(msg)
+        event.save()
+
+
 # Main:
 if __name__ == "__main__":
     import_authors()
     import_books()
+    import_book_start_events()
