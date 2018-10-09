@@ -130,7 +130,7 @@ class BookEndEvent(Event):
 
     # Special methods:
     def __str__(self):
-        return "Book finished"
+        return f"'{self.book}' finished"
 
     def __unicode__(self):
         return self.__str__()

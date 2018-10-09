@@ -13,7 +13,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebProgress.settings")
 django.setup()
 
 # Our libs:
-from books.models import Author, Book, BookStartEvent
+from books.models import Author, Book, BookStartEvent, BookEndEvent, PageUpdateEvent
 
 
 # Functions:
@@ -69,8 +69,26 @@ def import_book_start_events(in_fn="book_start_events.json"):
         event.save()
 
 
+def import_book_end_events(in_fn="book_end_events.json"):
+    with open(in_fn) as f:
+        events = json.load(f)
+
+    for k, val in events.items():
+        # If already there, overwrite:
+        try:
+            event = BookEndEvent.objects.get(pk=k)
+        except ObjectDoesNotExist:
+            event = BookEndEvent(pk=k)
+        event.book = Book.objects.get(pk=val["book_pk"])
+        event.when = datetime.strptime(val["when"], "%Y-%m-%d %H:%M:%S").astimezone(pytz.timezone("Europe/Madrid"))
+        msg = f"Imported [EVENT] {event}"
+        print(msg)
+        event.save()
+
+
 # Main:
 if __name__ == "__main__":
     import_authors()
     import_books()
     import_book_start_events()
+    import_book_end_events()
