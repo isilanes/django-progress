@@ -32,3 +32,16 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ("title", "year")
     search_fields = ["title"]
     inlines = [BookStartInline, PageUpdateInline, BookEndInline]
+
+
+@admin.register(BookStartEvent)
+class BookStartEventAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(PageUpdateEvent)
+class PageUpdateEventAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(BookEndEvent)
+class BookEndEventAdmin(admin.ModelAdmin):
+    pass
