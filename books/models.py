@@ -100,7 +100,7 @@ class PageUpdateEvent(Event):
 
     # Special methods:
     def __str__(self):
-        return f"{self.pages_read} pages read"
+        return f"{self.pages_read} pages read on '{self.book}"
 
     def __unicode__(self):
         return self.__str__()
