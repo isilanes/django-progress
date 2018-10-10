@@ -17,7 +17,11 @@ from books.models import Author, Book, BookStartEvent, BookEndEvent, PageUpdateE
 
 
 # Functions:
-def import_authors(in_fn="authors.json"):
+def homed(file_name):
+    return os.path.join(os.environ.get("HOME"), file_name)
+
+
+def import_authors(in_fn=homed("authors.json")):
     with open(in_fn) as f:
         authors = json.load(f)
 
@@ -33,7 +37,7 @@ def import_authors(in_fn="authors.json"):
         author.save()
 
 
-def import_books(in_fn="books.json"):
+def import_books(in_fn=homed("books.json")):
     with open(in_fn) as f:
         books = json.load(f)
 
@@ -52,7 +56,7 @@ def import_books(in_fn="books.json"):
         book.save()
 
 
-def import_book_start_events(in_fn="book_start_events.json"):
+def import_book_start_events(in_fn=homed("book_start_events.json")):
     with open(in_fn) as f:
         events = json.load(f)
 
@@ -69,7 +73,25 @@ def import_book_start_events(in_fn="book_start_events.json"):
         event.save()
 
 
-def import_book_end_events(in_fn="book_end_events.json"):
+def import_page_update_events(in_fn=homed("page_update_events.json")):
+    with open(in_fn) as f:
+        events = json.load(f)
+
+    for k, val in events.items():
+        # If already there, overwrite:
+        try:
+            event = PageUpdateEvent.objects.get(pk=k)
+        except ObjectDoesNotExist:
+            event = PageUpdateEvent(pk=k)
+        event.book = Book.objects.get(pk=val["book_pk"])
+        event.when = datetime.strptime(val["when"], "%Y-%m-%d %H:%M:%S").astimezone(pytz.timezone("Europe/Madrid"))
+        event.pages_read = val["pages_read"]
+        msg = f"Imported [EVENT] {event}"
+        print(msg)
+        event.save()
+
+
+def import_book_end_events(in_fn=homed("book_end_events.json")):
     with open(in_fn) as f:
         events = json.load(f)
 
@@ -91,4 +113,5 @@ if __name__ == "__main__":
     import_authors()
     import_books()
     import_book_start_events()
+    import_page_update_events()
     import_book_end_events()
