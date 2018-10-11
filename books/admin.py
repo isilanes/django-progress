@@ -28,7 +28,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    fields = ["title", "author", "pages", "year"]
+    fields = ["title", "authors", "pages", "year"]
     list_display = ("title", "year")
     search_fields = ["title"]
     inlines = [BookStartInline, PageUpdateInline, BookEndInline]

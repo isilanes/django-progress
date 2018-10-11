@@ -19,4 +19,5 @@ urlpatterns = [
 
     # Details:
     path('book/<int:book_id>', views.book_detail, name='book_detail'),
+    path('author/<int:author_id>', views.author_detail, name='author_detail'),
 ]

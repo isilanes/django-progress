@@ -1,0 +1,33 @@
+<head>
+    {% include "books/header.html" %}
+</head>
+
+<body>
+
+<div id="banner">
+    <div id="book-head">
+        Author: {{author.name}}
+    </div>
+</div>
+
+<div id="main-content">
+    <p><a href="{% url 'books:index' %}">Volver al índice</a></p>
+    <br>
+
+    <table>
+        <tr>
+            <th>Título:</th>
+            <td>{{book.title}}</td>
+        </tr>
+        <tr>
+            <th>Autor:</th>
+            <td>
+                {% for author in book.authors.all %}
+                    {{ author }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>

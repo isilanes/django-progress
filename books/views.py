@@ -7,7 +7,7 @@ from bokeh.embed import components
 
 # Our libs:
 from . import statistics
-from .models import Book
+from .models import Book, Author
 
 
 # Views:
@@ -38,6 +38,18 @@ def book_detail(request, book_id=None):
      }
 
     return render(request, "books/book_detail.html", context)
+
+
+def author_detail(request, author_id=None):
+    """Detail view for an author."""
+
+    author = Author.objects.get(pk=author_id)
+
+    context = {
+        "author": author,
+    }
+
+    return render(request, "books/author_detail.html", context)
 
 
 def stats(request, year):

@@ -24,7 +24,11 @@
         </tr>
         <tr>
             <th>Autor:</th>
-            <td>{{book.author}}</td>
+            <td>
+                {% for author in book.authors.all %}
+                <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
         </tr>
     </table>
 
