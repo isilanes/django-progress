@@ -16,17 +16,13 @@
 
     <table>
         <tr>
-            <th>Título:</th>
-            <td>{{book.title}}</td>
+            <th>Libros</th>
         </tr>
+        {% for book in author.book_set.all %}
         <tr>
-            <th>Autor:</th>
-            <td>
-                {% for author in book.authors.all %}
-                    {{ author }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
+            <td><a href="{% url 'books:book_detail' book.id %}">{{ book }}</a></td>
         </tr>
+        {% endfor %}
     </table>
 </div>
 
