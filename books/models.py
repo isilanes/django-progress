@@ -18,7 +18,8 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    #author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ManyToManyField(Author, on_delete=models.CASCADE)
     title = models.CharField("Title", max_length=300)
     pages = models.IntegerField("Pages", default=1)
     year = models.IntegerField("Year", default=1)

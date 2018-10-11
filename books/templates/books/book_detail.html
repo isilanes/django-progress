@@ -1,7 +1,8 @@
 <head>
     {% include "books/header.html" %}
     {% include "books/bokeh_header.html" %}
-    {{ plot_script | safe }}
+    {{ progress_plot_script | safe }}
+    {{ rate_plot_script | safe }}
 </head>
 
 <body>
@@ -42,7 +43,12 @@
         {% endfor %}
     </table>
 
-    {{ plot_div | safe }}
+    <table>
+        <tr>
+            <td>{{ progress_plot_div | safe }}</td>
+            <td>{{ rate_plot_div | safe }}</td>
+        </tr>
+    </table>
 </div>
 
 </body>
