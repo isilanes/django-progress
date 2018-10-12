@@ -23,6 +23,20 @@ class Book(models.Model):
     pages = models.IntegerField("Pages", default=1)
     year = models.IntegerField("Year", default=1)
 
+    # Public methods:
+    def mark_read(self):
+        """Mark self as read."""
+
+        end = BookEndEvent(book=self, when=timezone.now())
+        end.save()
+
+    def set_pages(self, pages=None):
+        """Mark 'pages' as pages read. Do nothing if 'None'."""
+
+        if pages is not None:
+            event = PageUpdateEvent(book=self, when=timezone.now(), pages_read=pages)
+            event.save()
+
     # Public properties:
     @property
     def events(self):

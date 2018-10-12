@@ -14,7 +14,11 @@
 </div>
 
 <div id="main-content">
-    <p><a href="{% url 'books:index' %}">Volver al índice</a></p>
+    <p>
+        <a href="{% url 'books:index' %}">Volver al índice</a> |
+        <a href="{% url 'books:modify_book' book.id %}">Modificar</a>
+    </p>
+
     <br>
 
     <table>
@@ -40,7 +44,14 @@
         </tr>
     </table>
 
-    <br><br>
+    <br>
+
+    <form action="{% url 'books:mark_book_read' book.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Mark read</button>
+    </form>
+
+   <br>
 
     <table>
         <tr>

@@ -1,5 +1,5 @@
 # Django libs:
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Bokeh libs:
 from bokeh.plotting import figure
@@ -7,6 +7,7 @@ from bokeh.embed import components
 
 # Our libs:
 from . import statistics
+from .forms import BookForm
 from .models import Book, Author
 
 
@@ -22,7 +23,7 @@ def index(request):
     return render(request, "books/index.html", context)
 
 
-def book_detail(request, book_id=None):
+def book_detail(request, book_id):
     """Detail view for a book."""
 
     book = Book.objects.get(pk=book_id)
@@ -38,6 +39,41 @@ def book_detail(request, book_id=None):
      }
 
     return render(request, "books/book_detail.html", context)
+
+
+def modify_book(request, book_id):
+    """Form to modify state of book."""
+
+    book = Book.objects.get(pk=book_id)
+
+    if request.method == "POST":
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book.set_pages(form.cleaned_data.get("pages_read"))
+            return redirect("books:book_detail", book_id=book_id)
+
+    else:
+        initial = {
+            "pages_read": book.pages_read,
+        }
+        form = BookForm(initial=initial)
+
+    context = {
+        "form": form,
+        "book": book,
+    }
+
+    return render(request, 'books/modify_book.html', context)
+
+
+def mark_book_read(request, book_id):
+    """Come here with a POST to mark a book read."""
+
+    if request.method == "POST":
+        book = Book.objects.get(pk=book_id)
+        book.mark_read()
+
+    return redirect("books:book_detail", book_id=book_id)
 
 
 def author_detail(request, author_id=None):
