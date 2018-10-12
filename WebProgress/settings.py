@@ -10,8 +10,8 @@ from . import core
 # The first one found will be used.
 try_confs = [
     os.environ.get("DJANGO_PROGRESS_CONF", None),
-    os.path.join(os.environ["HOME"], ".WebProgress.json"),
-    os.path.join("conf", "WebProgress.json"),
+    os.path.join(os.environ["HOME"], ".django-progress.json"),
+    os.path.join("conf", "django-progress.json"),
 ]
 
 for conf in try_confs:
