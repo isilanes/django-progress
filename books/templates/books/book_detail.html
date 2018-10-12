@@ -20,7 +20,7 @@
     <table>
         <tr>
             <th>Título:</th>
-            <td>{{book.title}}</td>
+            <td>{{ book.title }}</td>
         </tr>
         <tr>
             <th>Autor:</th>
@@ -29,6 +29,14 @@
                 <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </td>
+        </tr>
+        <tr>
+            <th>Pages:</th>
+            <td>{{ book.pages }}</td>
+        </tr>
+        <tr>
+            <th>Published:</th>
+            <td>{{ book.year }}</td>
         </tr>
     </table>
 
