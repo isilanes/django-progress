@@ -31,6 +31,7 @@ def import_authors(in_fn=homed("authors.json")):
             author = Author.objects.get(pk=k)
         except ObjectDoesNotExist:
             author = Author(pk=k)
+
         author.name = val["name"]
         msg = f"Imported [AUTHOR] {author}"
         print(msg)
@@ -47,10 +48,13 @@ def import_books(in_fn=homed("books.json")):
             book = Book.objects.get(pk=k)
         except ObjectDoesNotExist:
             book = Book(pk=k)
-        book.author = Author.objects.get(pk=val["author_pk"])
+            book.save()
+
+        book.authors.add(*[Author.objects.get(pk=pk) for pk in val.get("author_pks", [])])
         book.title = val["title"]
         book.pages = val["pages"]
         book.year = val["year"]
+
         msg = f"Imported [BOOK] {book}"
         print(msg)
         book.save()

@@ -14,7 +14,6 @@ try_confs = [
     os.path.join("conf", "WebProgress.json"),
 ]
 
-
 for conf in try_confs:
     if conf and os.path.isfile(conf):
         with open(conf, 'r') as f:
