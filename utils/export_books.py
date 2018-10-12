@@ -6,7 +6,7 @@ import django
 
 # Python stuff:
 sys.path.append("..")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangobooks.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebProgress.settings")
 django.setup()
 
 # Our libs:
@@ -37,7 +37,7 @@ def export_books(out_fn=homed("books.json")):
         msg = f"Exporting [BOOK] {book}"
         print(msg)
         book_dict[book.id] = {
-            "author_pk": book.author.pk,
+            "author_pks": [author.id for author in book.authors.all()],
             "title": book.title,
             "pages": book.pages,
             "year": book.year,
