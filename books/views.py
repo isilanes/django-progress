@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 # Bokeh libs:
 from bokeh.plotting import figure
 from bokeh.embed import components
+from bokeh.layouts import gridplot
 
 # Our libs:
 from . import statistics
@@ -99,6 +100,7 @@ def stats(request, year):
     return render(request, "books/stats.html", context)
 
 
+# Helper functions:
 def mk_book_progress_plot(book):
     """Generate and return Bokeh plot object for book page progress."""
 
@@ -113,7 +115,8 @@ def mk_book_progress_plot(book):
     # Build plot:
     plot = figure(title="Reading progress",
                   x_axis_label='Date',
-                  y_axis_label='Pages read')
+                  y_axis_label='Pages read',
+                  x_axis_type="datetime")
 
     plot.line(X, Y, legend='pages', line_width=2)
 
@@ -142,6 +145,7 @@ def mk_page_rate_plot(book):
     # Build plot:
     plot = figure(title="Reading rate",
                   x_axis_label='Date',
+                  x_axis_type="datetime",
                   y_axis_label='pages/day')
 
     plot.line(X, Y, line_width=2)
@@ -149,7 +153,6 @@ def mk_page_rate_plot(book):
     return plot
 
 
-# Helper functions
 def currently_reading_books():
     """Return list of books currently being read, unsorted."""
 
