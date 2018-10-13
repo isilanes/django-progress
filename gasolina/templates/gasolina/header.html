@@ -1,4 +1,11 @@
 {% load static %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+<style>
+    input { font-size: 200%; }
+    label { font-size: 200%; }
+</style>
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
@@ -18,21 +25,24 @@
                                                     alt="default" style="width: 64px;" /></a></td>
       <td>
           <a href="{% url 'gasolina:plot_item' 'intake' %}">
-              <img src="{% static 'gasolina/icons/intake.png' %}" alt="default" style="width: 64px;" /></a>
+              <img src="{% static 'gasolina/icons/oil-drop-512.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
       <td>
           <a href="{% url 'gasolina:plot_item' 'range' %}">
-              <img src="{% static 'gasolina/icons/range.png' %}" alt="default" style="width: 64px;" /></a>
+              <img src="{% static 'gasolina/icons/range_icon.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
       <td>
           <a href="{% url 'gasolina:plot_item' 'kms_per_year' %}">
-              <img src="{% static 'gasolina/icons/distance.png' %}" alt="default" style="width: 64px;" /></a>
+              <img src="{% static 'gasolina/icons/distance-icon.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
       <td>
           <a href="{% url 'gasolina:plot_item' 'euros_per_month' %}">
-              <img src="{% static 'gasolina/icons/euros.png' %}" alt="default" style="width: 64px;" /></a>
+              <img src="{% static 'gasolina/icons/Euros-512.png' %}" alt="default" style="width: 64px;" /></a>
       </td>
   </tr>
 </table>
+
+{% block content %}
+{% endblock %}
 
 </body>

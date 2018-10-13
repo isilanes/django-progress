@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from gasolina.forms import VsTimeForm
 from gasolina.models import PlotState, VariableConfig
 
+
 # Indices:
 def index(request):
     """Show stats historically."""
@@ -52,7 +53,7 @@ def index(request):
             "item": "intake",
         }
 
-        return render(request, 'gasolina/stats_vs_time.html', context)
+        return render(request, 'gasolina/index.html', context)
 
 
 # Plots:
