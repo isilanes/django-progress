@@ -64,5 +64,3 @@ if __name__ == "__main__":
         "instants": exported_time_instants(),
         "weights": exported_weights(),
     }
-
-    print(data)
