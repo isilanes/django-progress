@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 # Bokeh libs:
 from bokeh.plotting import figure
 from bokeh.embed import components
-from bokeh.layouts import gridplot
 
 # Our libs:
 from . import statistics
