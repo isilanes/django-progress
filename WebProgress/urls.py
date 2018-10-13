@@ -15,5 +15,6 @@ urlpatterns = [
     # Apps:
     path('gasolina/', include('gasolina.urls', namespace="gasolina")),
     path('ahorro/', include('ahorro.urls', namespace="ahorro")),
+    path('pesos/', include('pesos.urls', namespace="pesos")),
     path('books/', include('books.urls', namespace="books")),
 ]

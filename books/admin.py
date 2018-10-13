@@ -38,9 +38,11 @@ class BookAdmin(admin.ModelAdmin):
 class BookStartEventAdmin(admin.ModelAdmin):
     pass
 
+
 @admin.register(PageUpdateEvent)
 class PageUpdateEventAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(BookEndEvent)
 class BookEndEventAdmin(admin.ModelAdmin):
