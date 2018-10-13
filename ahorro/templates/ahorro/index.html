@@ -1,25 +1,22 @@
-{% load staticfiles %}
+{% extends "ahorro/header.html" %}
+{% load bootstrap3 %}
 
-{% include "ahorro/header.html" %}
-
-<table width="100%">
+{% block content %}
+<table width="50%">
     <tr>
         <td>
             <table>
                 <tr>
-                    <form method="POST" id="post-form">
+                    <form method="POST" id="post-form" class="form">
                         {% csrf_token %}
-                        {{ form }}
-                        <input type="submit" value="Submit" class="tiny button">
+                        {% bootstrap_form form layout="vertical" %}
+                        {% buttons %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        {% endbuttons %}
                     </form>
                 </tr>
             </table>
         </td>
-        <td width="75%"><canvas id="item_chart"></canvas></td>
     </tr>
 </table>
-
-<meta id="data-url" data-name="{% url 'ahorro:item_data' 'total' %}">
-
-<script src="{% static "ahorro/js/item_chart.js" %}"></script>
-
+{% endblock %}

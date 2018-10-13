@@ -1,4 +1,11 @@
 {% load static %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+
+<style>
+    input { font-size: 200%; }
+    label { font-size: 200%; }
+</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
@@ -10,8 +17,12 @@
 <table>
     <tr>
       <td><a href="/"><img src="{% static 'ahorro/icons/home.png' %}" alt="default" style="width: 64px;" /></a></td>
-      <td><a href="{% url 'ahorro:index' %}"><img src="{% static 'ahorro/icons/ahorro_logo.png' %}"
-                                                  alt="default" style="width: 64px;" /></a></td>
+      <td><a href="{% url 'ahorro:index' %}">
+          <img src="{% static 'ahorro/icons/ahorro_logo.png' %}" alt="default" style="width: 64px;" /></a>
+      </td>
+      <td><a href="{% url 'ahorro:plot_item' 'total' %}">
+          <img src="{% static 'ahorro/icons/Euros-512.png' %}" alt="default" style="width: 64px;" /></a>
+      </td>
       {% for account in account_list %}
       <td>
           <a href="{% url 'ahorro:plot_item' account.name %}">
@@ -22,4 +33,7 @@
       {% endfor %}
     </tr>
 </table>
+
+{% block content %}
+{% endblock %}
 

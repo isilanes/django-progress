@@ -40,7 +40,7 @@ class Account(models.Model):
 
 
 class Amount(models.Model):
-    """An amount of time (for a given Account, on a given TimeInstant."""
+    """An amount of money (for a given Account, on a given TimeInstant)."""
 
     value = models.FloatField("Amount", default=0.0)
     when = models.ForeignKey(TimeInstant, on_delete=models.CASCADE)
