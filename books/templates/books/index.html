@@ -1,15 +1,8 @@
-{% include "books/header.html" %}
+{% extends "books/header.html" %}
 
-<div id="banner">
-    <div id="book-head">
-        Índice
-    </div>
-</div>
-
-<div id="main-content">
+{% block content %}
 
 {% include "books/top_menu.html" %}
-
 
 <h2>Leyendo</h2>
 
@@ -41,4 +34,4 @@
     {% endfor %}
 </table>
 
-</div>
+{% endblock %}

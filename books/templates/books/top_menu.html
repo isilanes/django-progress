@@ -1,7 +1,13 @@
+{% load static %}
+
 <table>
     <tr>
-        <td><a href="/">Principal</a></td>
-        <td><a href="{% url 'books:index' %}">Volver al índice</a></td>
-        <td><a href="{% url 'books:stats' 2018 %}">Stats 2018</a></td>
+        <td><a href="/"><img src="{% static 'books/icons/home.png' %}" alt="default" style="width: 64px;" /></a></td>
+        <td><a href="{% url 'books:stats' %}">
+            <img src="{% static 'books/icons/books_logo.png' %}" alt="default" style="width: 64px;" /></a>
+        </td>
+        <td><a href="{% url 'books:index' %}">
+            <img src="{% static 'books/icons/index.png' %}" alt="default" style="width: 64px;" /></a>
+        </td>
     </tr>
 </table>

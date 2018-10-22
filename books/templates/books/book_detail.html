@@ -1,77 +1,69 @@
+{% extends "books/header.html" %}
+
+{% block content %}
+{% include "books/top_menu.html" %}
+{% include "books/bokeh_header.html" %}
+
 <head>
-    {% include "books/header.html" %}
-    {% include "books/bokeh_header.html" %}
     {{ progress_plot_script | safe }}
     {{ rate_plot_script | safe }}
 </head>
 
-<body>
+<table>
+    <tr>
+        <th>Título:</th>
+        <td>{{ book.title }}</td>
+    </tr>
+    <tr>
+        <th>Autor:</th>
+        <td>
+            {% for author in book.authors.all %}
+            <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <th>Pages:</th>
+        <td>{{ book.pages }}</td>
+    </tr>
+    <tr>
+        <th>Published:</th>
+        <td>{{ book.year }}</td>
+    </tr>
+</table>
 
-<div id="banner">
-    <div id="book-head">
-        Book: {{book.title}}
-    </div>
-</div>
+<br>
 
-<div id="main-content">
-    <p>
-        <a href="{% url 'books:index' %}">Volver al índice</a> |
-        <a href="{% url 'books:modify_book' book.id %}">Modificar</a>
-    </p>
+<form action="{% url 'books:modify_book' book.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Modificar</button>
+</form>
 
-    <br>
+<form action="{% url 'books:mark_book_read' book.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Marcar leído</button>
+</form>
 
-    <table>
-        <tr>
-            <th>Título:</th>
-            <td>{{ book.title }}</td>
-        </tr>
-        <tr>
-            <th>Autor:</th>
-            <td>
-                {% for author in book.authors.all %}
-                <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <th>Pages:</th>
-            <td>{{ book.pages }}</td>
-        </tr>
-        <tr>
-            <th>Published:</th>
-            <td>{{ book.year }}</td>
-        </tr>
-    </table>
+<br>
 
-    <br>
+<table>
+    <tr>
+        <th>Fecha</th>
+        <th style="text-align: left">Evento</th>
+    </tr>
+    {% for event in book.events %}
+    <tr>
+        <td>{{event.when|date:"Y-m-d H:i" }}</td>
+        <td style="text-align: left">{{event}}</td>
+    </tr>
+    {% endfor %}
+</table>
 
-    <form action="{% url 'books:mark_book_read' book.id %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Mark read</button>
-    </form>
+<table>
+    <tr>
+        <td>{{ progress_plot_div | safe }}</td>
+        <td>{{ rate_plot_div | safe }}</td>
+    </tr>
+</table>
 
-   <br>
-
-    <table>
-        <tr>
-            <th>Fecha</th>
-            <th style="text-align: left">Evento</th>
-        </tr>
-        {% for event in book.events %}
-        <tr>
-            <td>{{event.when|date:"Y-m-d H:i" }}</td>
-            <td style="text-align: left">{{event}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <table>
-        <tr>
-            <td>{{ progress_plot_div | safe }}</td>
-            <td>{{ rate_plot_div | safe }}</td>
-        </tr>
-    </table>
-</div>
-
-</body>
+{% endblock %}

@@ -12,9 +12,10 @@ app_name = "books"
 # URL patterns:
 urlpatterns = [
     # Main:
-    path('', views.index, name="index"),
+    path('', views.stats, name="stats"),
 
     # Misc:
+    path('index', views.index, name="index"),
     path('stats/<int:year>', views.stats, name="stats"),
 
     # Details:

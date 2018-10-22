@@ -3,6 +3,6 @@
     "DEBUG": true,
     "DBFILE": "progress.db",
     "ALLOWED_HOSTS": ["localhost", "192.168.0.20"],
-    "MY_INSTALLED_APPS": ["gasolina", "ahorro", "books"],
+    "MY_INSTALLED_APPS": ["gasolina", "ahorro", "books", "pesos"],
     "FREE": true
 }

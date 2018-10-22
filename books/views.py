@@ -1,4 +1,5 @@
 # Django libs:
+from django.utils import timezone
 from django.shortcuts import render, redirect
 
 # Bokeh libs:
@@ -88,12 +89,17 @@ def author_detail(request, author_id=None):
     return render(request, "books/author_detail.html", context)
 
 
-def stats(request, year):
+def stats(request, year=None):
     """View with statistics for 'year'."""
+
+    # If no year given, use current:
+    if year is None:
+        year = timezone.now().year
 
     context = {
         "year": year,
-        "state": statistics.State(year)
+        "state": statistics.State(year),
+        "currently_reading_books": currently_reading_books(),
     }
 
     return render(request, "books/stats.html", context)

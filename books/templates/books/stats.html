@@ -1,16 +1,27 @@
-{% include "books/header.html" %}
+{% extends "books/header.html" %}
 {% include "books/bokeh_header.html" %}
 
-<div id="banner">
-    <div id="book-head">
-        Stats para {{ year }}
-    </div>
-</div>
+<style>
+    table { font-size: 250%; }
+</style>
 
-
-<div id="main-content">
-
+{% block content %}
     {% include "books/top_menu.html" %}
+
+    <br>
+
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Páginas leídas</th>
+        </tr>
+        {% for book in currently_reading_books %}
+        <tr>
+            <td><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></td>
+            <td>{{book.pages_read}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
     <br>
 
@@ -51,4 +62,4 @@
             <td>{{state.required_pages_per_day|floatformat:1}}</td>
         </tr>
     </table>
-</div>
+{% endblock %}
