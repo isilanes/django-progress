@@ -1,13 +1,12 @@
 {% load static %}
 
-<table>
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<link rel="shortcut icon" type="image/png" href="{% static 'icons/favicon.png' %}" />
+
+<table class="top-buttons">
     <tr>
-        <td><a href="/"><img src="{% static 'books/icons/home.png' %}" alt="default" style="width: 64px;" /></a></td>
-        <td><a href="{% url 'books:stats' %}">
-            <img src="{% static 'books/icons/books_logo.png' %}" alt="default" style="width: 64px;" /></a>
-        </td>
-        <td><a href="{% url 'books:index' %}">
-            <img src="{% static 'books/icons/index.png' %}" alt="default" style="width: 64px;" /></a>
-        </td>
+        <td><a class="button-books" href="/">Home</a></td>
+        <td><a class="button-books" href="{% url 'books:stats' %}">Stats</a></td>
+        <td><a class="button-books" href="{% url 'books:index' %}">Index</a></td>
     </tr>
 </table>
