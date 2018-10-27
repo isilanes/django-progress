@@ -69,3 +69,59 @@ button.modify {
     border-radius: 8px;
     background-color: #34aa66;
 }
+
+button.mark-read {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #ffaa66;
+}
+
+input.submit {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 40px;
+    border-radius: 8px;
+    background-color: #34aa66;
+}
+
+input {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: black;
+    background-color: #ccddff;
+}
+
+label {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 40px;
+    border-radius: 8px;
+    color: black;
+    background-color: #ffffff;
+}
