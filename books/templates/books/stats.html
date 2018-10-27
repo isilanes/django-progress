@@ -9,8 +9,8 @@
 
 <table>
     <tr>
-        <th>Título</th>
-        <th>Páginas leídas</th>
+        <th>Title</th>
+        <th>Pages read</th>
     </tr>
     {% for book in currently_reading_books %}
     <tr>
@@ -24,38 +24,38 @@
 
 <table>
     <tr>
-        <th>Libros leídos:</th>
+        <th>Books read:</th>
         <td style="text-align: right">{{state.books_read|floatformat:1}}</td>
     </tr>
     <tr>
-        <th>Libros por semana:</th>
+        <th>Books per week:</th>
         <td style="text-align: right">{{state.books_per_week|floatformat:2}}</td>
     </tr>
     <tr>
-        <th>Páginas leídas:</th>
+        <th>Pages read:</th>
         <td style="text-align: right">{{state.pages_read}}</td>
     </tr>
     <tr>
-        <th>Páginas leídas por día:</th>
+        <th>Pages read per day:</th>
         <td style="text-align: right">{{state.pages_per_day|floatformat:1}}</td>
     </tr>
     <tr>
-        <th>Páginas por libro:</th>
+        <th>Pages per book:</th>
         <td style="text-align: right">{{state.pages_per_book|floatformat:1}}</td>
     </tr>
 
     <tr><td><br></td></tr>
 
     <tr>
-        <th>Libros que faltan por leer:</th>
+        <th>Books to read:</th>
         <td style="text-align: right">{{state.required_books|floatformat:1}}</td>
     </tr>
     <tr>
-        <th>Libros por semana necesarios:</th>
+        <th>Books per week required:</th>
         <td style="text-align: right">{{state.required_books_per_week|floatformat:2}}</td>
     </tr>
     <tr>
-        <th>Páginas diarias necesarias:</th>
+        <th>Daily pages required:</th>
         <td style="text-align: right">{{state.required_pages_per_day|floatformat:1}}</td>
     </tr>
 </table>

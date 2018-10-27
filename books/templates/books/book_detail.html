@@ -14,11 +14,11 @@
 
 <table class="normal">
     <tr>
-        <th>Título:</th>
+        <th>Title:</th>
         <td>{{ book.title }}</td>
     </tr>
     <tr>
-        <th>Autor:</th>
+        <th>Author:</th>
         <td>
             {% for author in book.authors.all %}
             <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
@@ -39,15 +39,15 @@
 
 <form action="{% url 'books:modify_book' book.id %}" method="post">
     {% csrf_token %}
-    <button type="submit" class="modify">Modificar</button>
+    <button type="submit" class="modify">Modify</button>
 </form>
 
 <br>
 
 <table class="normal">
     <tr>
-        <th>Fecha</th>
-        <th style="text-align: left">Evento</th>
+        <th>Date</th>
+        <th style="text-align: left">Event</th>
     </tr>
     {% for event in book.events %}
     <tr>
