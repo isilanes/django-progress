@@ -27,9 +27,16 @@ table, th, td {
 
 table {
     font-size: 250%;
-    padding: 0px;
     position: center;
     border-collapse: collapse;
+    border-spacing: 25px 2px;
+}
+
+table.normal {
+    font-size: 250%;
+    position: center;
+    border-collapse: collapse;
+    border-spacing: 25px 2px;
 }
 
 table.medium {
@@ -40,13 +47,25 @@ th {
     /*height: 50px;*/
     background-color: #7766ff;
     color: white;
-    padding: 5px;
+    padding: 5px 10px;
     text-align: left;
 }
 
-td {
-    text-align: left;
-    /*height: 80px;*/
-    vertical-align: top;
-    padding: 5px;
+.normal td {
+    vertical-align: center;
+    padding: 5px 20px;
+}
+
+button.modify {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 40px;
+    border-radius: 8px;
+    background-color: #34aa66;
 }

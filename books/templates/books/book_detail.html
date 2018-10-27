@@ -1,6 +1,7 @@
 {% extends "books/header.html" %}
 
 {% block content %}
+
 {% include "books/top_menu.html" %}
 {% include "books/bokeh_header.html" %}
 
@@ -9,7 +10,9 @@
     {{ rate_plot_script | safe }}
 </head>
 
-<table>
+<br><br>
+
+<table class="normal">
     <tr>
         <th>Título:</th>
         <td>{{ book.title }}</td>
@@ -28,7 +31,7 @@
     </tr>
     <tr>
         <th>Published:</th>
-        <td>{{ book.year }}</td>
+        <td style="padding: 5px 20px;">{{ book.year }}</td>
     </tr>
 </table>
 
@@ -36,17 +39,12 @@
 
 <form action="{% url 'books:modify_book' book.id %}" method="post">
     {% csrf_token %}
-    <button type="submit">Modificar</button>
-</form>
-
-<form action="{% url 'books:mark_book_read' book.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Marcar leído</button>
+    <button type="submit" class="modify">Modificar</button>
 </form>
 
 <br>
 
-<table>
+<table class="normal">
     <tr>
         <th>Fecha</th>
         <th style="text-align: left">Evento</th>
@@ -59,9 +57,13 @@
     {% endfor %}
 </table>
 
+<br>
+
 <table>
     <tr>
         <td>{{ progress_plot_div | safe }}</td>
+    </tr>
+    <tr>
         <td>{{ rate_plot_div | safe }}</td>
     </tr>
 </table>

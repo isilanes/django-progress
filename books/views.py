@@ -121,7 +121,8 @@ def mk_book_progress_plot(book):
     plot = figure(title="Reading progress",
                   x_axis_label='Date',
                   y_axis_label='Pages read',
-                  x_axis_type="datetime")
+                  x_axis_type="datetime",
+                  width=900)
 
     plot.line(X, Y, legend='pages', line_width=2)
 
@@ -151,7 +152,8 @@ def mk_page_rate_plot(book):
     plot = figure(title="Reading rate",
                   x_axis_label='Date',
                   x_axis_type="datetime",
-                  y_axis_label='pages/day')
+                  y_axis_label='pages/day',
+                  width=900)
 
     plot.line(X, Y, line_width=2)
 
