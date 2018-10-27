@@ -4,7 +4,7 @@
 
 {% include "books/top_menu.html" %}
 
-<h2>Leyendo</h2>
+<br><br>
 
 <table>
     <tr>
@@ -14,14 +14,14 @@
     {% for book in currently_reading_books %}
     <tr>
         <td><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></td>
-        <td>{{book.pages_read}}</td>
+        <td style="text-align: right">{{book.pages_read}}</td>
     </tr>
     {% endfor %}
 </table>
 
-<h2>Leídos</h2>
+<br><br>
 
-<table>
+<table class="medium">
     <tr>
         <th>Título</th>
         <th>Fecha</th>

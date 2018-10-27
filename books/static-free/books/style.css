@@ -32,6 +32,10 @@ table {
     border-collapse: collapse;
 }
 
+table.medium {
+    font-size: 150%;
+}
+
 th {
     /*height: 50px;*/
     background-color: #7766ff;
