@@ -48,16 +48,17 @@ def modify_book(request, book_id):
     book = Book.objects.get(pk=book_id)
 
     if request.method == "POST":
-        form = BookForm(request.POST)
+        form = BookForm(request.POST or None)
         if form.is_valid():
-            book.set_pages(form.cleaned_data.get("pages_read"))
-            return redirect("books:book_detail", book_id=book_id)
+            pages_read = form.cleaned_data.get("pages_read")
+            if pages_read is not None:
+                book.set_pages(pages_read)
+                return redirect("books:book_detail", book_id=book_id)
 
-    else:
-        initial = {
-            "pages_read": book.pages_read,
-        }
-        form = BookForm(initial=initial)
+    initial = {
+        "pages_read": book.pages_read,
+    }
+    form = BookForm(initial=initial)
 
     context = {
         "form": form,

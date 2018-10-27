@@ -49,3 +49,7 @@ table.buttons {
 .button-books {
     background-color: #3344aa;
 }
+
+a {
+    text-decoration: none;
+}
