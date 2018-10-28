@@ -22,10 +22,17 @@
 
 <br><br>
 
-<table>
+<table class="normal">
     <tr>
         <th>Books read:</th>
         <td style="text-align: right">{{state.books_read|floatformat:1}}</td>
+        {% if state.book_superavit_percent > 0 %}
+        <td style="text-align: right; color: green">(+
+        {% else %}
+        <td style="text-align: right; color: red">(
+        {% endif %}
+            {{state.book_superavit_percent|floatformat:+2}} %)
+        </td>
     </tr>
     <tr>
         <th>Books per week:</th>

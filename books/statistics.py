@@ -5,42 +5,6 @@ from datetime import datetime
 from .models import Book, BookEndEvent
 
 
-# Functions:
-def books_and_pages_so_far(year):
-    """Number of books and pages read during year."""
-
-    books_this_year = 0
-    pages_this_year = 0
-
-    for book in Book.objects.all():
-
-        # Add 1 full book for each time book has been read this year:
-        for end in BookEndEvent.objects.filter(book=book):
-            if end.when.year == year:
-                books_this_year += 1
-                pages_this_year += book.pages
-
-        # Add fraction of pages read, if currently reading:
-        if book.is_currently_being_read:
-            books_this_year += book.pages_read / book.pages
-            pages_this_year += book.pages_read
-
-    return books_this_year, pages_this_year
-
-
-def days_so_far(year):
-    """Total days of year, or days so far if current year."""
-
-    now = datetime.now()
-    first_day = datetime(year, 1, 1)
-
-    if year == now.year:
-        return (now - first_day).days
-    else:
-        last_day = datetime(year+1, 1, 1)
-        return (last_day - first_day).days
-
-
 # Classes:
 class State(object):
     """Encapsulate all State stuff."""
@@ -83,8 +47,20 @@ class State(object):
         return self._books_read
 
     @property
+    def expected_books_so_far(self):
+        """How many books we should have read so far in the year."""
+
+        return self.GOAL * self.year_fraction_passed
+
+    @property
+    def book_superavit_percent(self):
+        """How many books ahead we are in the book count up to now in the year."""
+
+        return 100. * (self.books_read  - self.expected_books_so_far) / self.expected_books_so_far
+
+    @property
     def pages_per_day(self):
-        return self.pages_read / self._days_so_far
+        return self.pages_read / self.days_so_far
 
     @property
     def books_per_week(self):
@@ -92,7 +68,7 @@ class State(object):
 
     @property
     def books_per_day(self):
-        return self.books_read / self._days_so_far
+        return self.books_read / self.days_so_far
 
     @property
     def required_books(self):
@@ -104,11 +80,43 @@ class State(object):
     def required_pages_per_day(self):
         """How many pages we have to read, per day, for the rest of the year."""
 
-        return self.pages_per_book * self._required_books_per_day
+        return self.pages_per_book * self.required_books_per_day
 
     @property
     def required_books_per_week(self):
-        return 7 * self._required_books_per_day
+        """Books/week we need to read for the remainder of the year."""
+
+        return 7 * self.required_books_per_day
+
+    @property
+    def required_books_per_day(self):
+        """Books/day we need to read for the remainder of the year."""
+
+        return self.required_books / self.remaining_days
+
+    @property
+    def remaining_days(self):
+        return 365 - self.days_so_far
+
+    @property
+    def year_fraction_passed(self):
+        """Fraction of year already passed. 1.0 if not current year."""
+
+        now = datetime.now()
+
+        if self.year == now.year:
+            passed_seconds = (now - datetime(self.year, 1, 1)).total_seconds()
+
+            return passed_seconds / 31536000.  # 31536000 seconds in a year
+
+        else:
+            return 1.0
+
+    @property
+    def days_so_far(self):
+        """Days so far in this year. 365 if not current year."""
+
+        return self.year_fraction_passed * 365
 
     # Private methods:
     def _books_and_pages_so_far(self):
@@ -132,39 +140,4 @@ class State(object):
 
         return books_this_year, pages_this_year
 
-    # Private properties:
-    @property
-    def _days_so_far(self):
-        """Total days of year, or days so far if current year."""
-
-        now = datetime.now()
-        first_day = datetime(self.year, 1, 1)
-
-        if self.year == now.year:
-            return (now - first_day).days
-        else:
-            last_day = datetime(self.year+1, 1, 1)
-            return (last_day - first_day).days
-
-    @property
-    def _required_books_per_day(self):
-        """Books/day we need to read for the remainder of the year."""
-
-        return self.required_books / self._remaining_days
-
-    @property
-    def _remaining_days(self):
-        """How many days left in year, or 1 if past year."""
-
-        now = datetime.now()
-        last_day = datetime(self.year+1, 1, 1)
-
-        rem = 0
-        if self.year == now.year:
-            rem = (last_day - now).days
-
-        if rem < 1:
-            rem = 1
-
-        return rem
 
