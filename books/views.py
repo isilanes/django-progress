@@ -8,8 +8,8 @@ from bokeh.embed import components
 
 # Our libs:
 from . import statistics
-from .forms import BookForm
-from .models import Book, Author
+from .models import Book, Author, BookStartEvent
+from .forms import BookForm, AddBookForm
 
 
 # Views:
@@ -66,6 +66,51 @@ def modify_book(request, book_id):
     }
 
     return render(request, 'books/modify_book.html', context)
+
+
+def add_book(request):
+    """Form to add a book."""
+
+    if request.method == "POST":
+        form = AddBookForm(request.POST or None)
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            if title is not None:
+                # Add data:
+                book = Book()
+                book.title = title
+                book.pages = form.cleaned_data.get("pages")
+                book.year = form.cleaned_data.get("year")
+                book.save()  # we must save BEFORE we add many-to-many field items (author(s) below)
+
+                # Add author data:
+                author_names = [a.strip() for a in form.cleaned_data.get("author", "").split(",")]
+                for author_name in author_names:
+                    try:
+                        author = Author.objects.get(name=author_name)
+                    except Author.DoesNotExist:
+                        author = Author(name=author_name)
+                    book.authors.add(author)
+
+                # Add started reading:
+                start = BookStartEvent()
+                start.book = book
+                start.when = timezone.now()
+                start.save()
+
+                return redirect("books:book_detail", book_id=book.id)
+
+    initial = {
+        "pages": 0,
+        "year": 0,
+    }
+    form = AddBookForm(initial=initial)
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, 'books/add_book.html', context)
 
 
 def mark_book_read(request, book_id):
