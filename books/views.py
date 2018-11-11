@@ -90,6 +90,7 @@ def add_book(request):
                         author = Author.objects.get(name=author_name)
                     except Author.DoesNotExist:
                         author = Author(name=author_name)
+                        author.save()
                     book.authors.add(author)
 
                 # Add started reading:
