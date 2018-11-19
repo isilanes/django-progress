@@ -4,7 +4,7 @@ import os
 
 # Constants:
 LINKS = {
-    os.path.join("WebProgress", "templates", "main_index.html"): {
+    os.path.join("DjangoProgress", "templates", "main_index.html"): {
         "free": "main_index_free.html",
         "nonfree": "main_index_nonfree.html",
     },

@@ -20,9 +20,6 @@ for conf in try_confs:
             J = json.load(f)
         break
 
-# Free or non-free version?:
-#core.mk_links(free=J.get("FREE", True))
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -57,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'WebProgress.urls'
+ROOT_URLCONF = 'DjangoProgress.urls'
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 TEMPLATES = [
@@ -76,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'WebProgress.wsgi.application'
+WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 
 
 # Database:
@@ -116,5 +113,5 @@ USE_TZ = True
 # Static files:
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "WebProgress", "static"),
+    os.path.join(BASE_DIR, "DjangoProgress", "static"),
 ]

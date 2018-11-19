@@ -14,4 +14,4 @@ fi
 TAG=$(git branch --color=never | awk '/\*/{print $2}')
 
 # Do run:
-docker run -v $LOCALDB:/srv/WebProgress/progress.db:rw --publish=8081:8000 isilanes/django-progress:$TAG
+docker run -v $LOCALDB:/srv/DjangoProgress/progress.db:rw --publish=8081:8000 isilanes/django-progress:$TAG

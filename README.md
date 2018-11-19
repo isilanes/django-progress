@@ -1,21 +1,45 @@
 This an example Python/Django web site for displaying evolution of some variables over time.
 
-Right now it has a set of views for gasoline consumptions, and another one for money balances in accounts. The previous sentence might convey an idea of higher complexity than it actually has.
+Right now it has a set of views for:
+  * `gasolina`: gasoline consumption
+  * `ahorro`: money balances in accounts
+  * `pesos`: personal weight
+  * `books`: books read
 
-## Installation and running
+## Installation
 
-It can be run by:
+It can be installed simply by cloning the repo:
 
 ```bash
-$ git clone https://github.com/isilanes/WebProgress
-$ cd WebProgress/
-$ python -m manage runserver localhost:8081
+$ git clone https://github.com/isilanes/django-progress.git
 ```
 
-You might have to install the required python. You can do so via pip (using a virtualenv is recommended):
+You might have to install the required python. You can do so via pip (using a virtualenv is HIGHLY recommended):
 
 ```bash
 $ pip install -r conf/requirements.txt
+```
+
+## Configuration
+
+Running `django-progress` requires defining some variables in a JSON configuration file. You can use the provided `conf/django-progress.json` sample config file directly, or make a copy and modify it to your liking. The path to the config file will be inferred at run time by checking in order:
+
+1. The value of the environment variable `DJANGO_PROGRESS_CONF`, if provided
+2. `~/.django-progress.json`, if this file exists
+3. `conf/django-progress.json`, if all else fails
+
+## Running
+
+To run, do as with any Django project:
+
+```bash
+$ python -m manage runserver localhost:8081
+```
+
+or:
+
+```bash
+$ DJANGO_PROGRESS_CONF=/path/to/my/conf python -m manage runserver localhost:8081
 ```
 
 The server can also be run with Gunicorn (edit script as appropriate):
@@ -62,7 +86,7 @@ There is also one view per each of the following properties:
 * yearly km average, vs time
 * monthly cost of gasoline, vs time
 
-## Accounting
+### Account balance
 
 Index/data introduction:
 

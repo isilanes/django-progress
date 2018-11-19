@@ -6,7 +6,7 @@ import django
 
 # Python stuff:
 sys.path.append("..")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebProgress.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DjangoProgress.settings")
 django.setup()
 
 # Our libs:

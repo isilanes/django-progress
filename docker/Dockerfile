@@ -16,7 +16,7 @@ ENV DOCKYARD_SRC=.
 ENV DOCKYARD_SRVHOME=/srv
 
 # Directory in container for project source files:
-ENV DOCKYARD_SRVPROJ=/srv/WebProgress
+ENV DOCKYARD_SRVPROJ=/srv/DjangoProgress
 
 # Update the default application repository sources list:
 RUN apt-get update

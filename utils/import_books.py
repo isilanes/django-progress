@@ -9,7 +9,7 @@ from datetime import datetime
 # Python stuff:
 from django.core.exceptions import ObjectDoesNotExist
 sys.path.append("..")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "WebProgress.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DjangoProgress.settings")
 django.setup()
 
 # Our libs:
