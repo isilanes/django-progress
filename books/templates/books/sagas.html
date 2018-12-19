@@ -7,9 +7,9 @@
 <br><br>
 
 {% for saga in sagas %}
-{{saga}}
+<div>{{saga}}</div>
 {% for book in saga.book_set.all %}
-- {{book}}
+<div>#{{book.index_in_saga}} {{book}}</div>
 {% endfor %}
 {% endfor %}
 

@@ -132,10 +132,10 @@ input.submit {
 }
 
 .top-buttons-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  justify-items: center;
-  grid-gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    grid-gap: 5px;
 }
 
 .top-buttons-grid a {
