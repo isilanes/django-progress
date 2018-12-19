@@ -33,6 +33,12 @@
         <th>Published:</th>
         <td style="padding: 5px 20px;">{{ book.year }}</td>
     </tr>
+    {% if book.saga %}
+    <tr>
+        <th>Saga:</th>
+        <td style="padding: 5px 20px;">{{ book.saga }} #{{book.index_in_saga}}</td>
+    </tr>
+    {% endif %}
 </table>
 
 <br>

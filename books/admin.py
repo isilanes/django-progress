@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Our libs:
-from .models import Author, Book, PageUpdateEvent, BookStartEvent, BookEndEvent
+from .models import Author, Book, PageUpdateEvent, BookStartEvent, BookEndEvent, Saga
 
 
 # Classes:
@@ -26,9 +26,14 @@ class AuthorAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Saga)
+class SagaAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    fields = ["title", "authors", "pages", "year"]
+    fields = ["title", "authors", "pages", "year", "saga", "index_in_saga"]
     list_display = ("title", "year")
     search_fields = ["title"]
     inlines = [BookStartInline, PageUpdateInline, BookEndInline]
