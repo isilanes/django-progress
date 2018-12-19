@@ -8,7 +8,7 @@ from bokeh.embed import components
 
 # Our libs:
 from . import statistics
-from .models import Book, Author, BookStartEvent
+from .models import Book, Author, BookStartEvent, Saga
 from .forms import BookForm, AddBookForm
 
 
@@ -22,6 +22,21 @@ def index(request):
     }
 
     return render(request, "books/index.html", context)
+
+
+def sagas(request):
+    """Saga view."""
+
+    sagas = Saga.objects.all()
+    for saga in sagas:
+        print(saga)
+        print(saga.book_set.all())
+
+    context = {
+        "sagas": sagas,
+    }
+
+    return render(request, "books/sagas.html", context)
 
 
 def book_detail(request, book_id):
@@ -218,3 +233,4 @@ def already_read_books():
 
     return [y for x, y in sorted([(book.date_read, book) for book in Book.objects.all()
                                   if book.is_already_read], reverse=True)]
+

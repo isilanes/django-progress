@@ -1,0 +1,17 @@
+{% extends "books/header.html" %}
+
+{% block content %}
+
+{% include "books/top_menu.html" %}
+
+<br><br>
+
+{% for saga in sagas %}
+{{saga}}
+{% for book in saga.book_set.all %}
+- {{book}}
+{% endfor %}
+{% endfor %}
+
+{% endblock %}
+
