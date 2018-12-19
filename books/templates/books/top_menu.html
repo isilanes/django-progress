@@ -1,11 +1,9 @@
 {% load static %}
 
-<table class="top-buttons">
-    <tr>
-        <td><a class="button-books" href="/">Home</a></td>
-        <td><a class="button-books" href="{% url 'books:stats' %}">Stats</a></td>
-        <td><a class="button-books" href="{% url 'books:index' %}">Index</a></td>
-        <td><a class="button-books" href="{% url 'books:sagas' %}">Sagas</a></td>
-        <td><a class="button-books" href="{% url 'books:add_book' %}">Add</a></td>
-    </tr>
-</table>
+<div class="top-buttons-grid" style="width: 100%">
+    <a href="/">Home</a>
+    <a href="{% url 'books:stats' %}">Stats</a>
+    <a href="{% url 'books:index' %}">Index</a>
+    <a href="{% url 'books:sagas' %}">Sagas</a>
+    <a href="{% url 'books:add_book' %}">Add</a>
+</div>
