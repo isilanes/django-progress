@@ -9,16 +9,27 @@ div#banner {
     color: #ffffff;
     text-align: center;
     font-size: 300%;
+    border-radius: 5px;
 }
 
-table.buttons {
+.main-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    grid-gap: 20px;
+}
+
+.main-buttons-grid a {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     width: 100%;
-    padding: 0px;
-    border-spacing: 20px 20px;
-}
-
-.buttons td {
-    width: 50%;
+    height: 200px;
+    line-height: 200px;
+    font-size: 50px;
+    border-radius: 15px;
 }
 
 .buttons a {
