@@ -151,3 +151,56 @@ input.submit {
     border-radius: 10px;
     background-color: #3344aa;
 }
+
+.saga-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    grid-gap: 5px;
+}
+
+.saga-head {
+    border: none;
+    color: #3344aa;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15;
+    border-radius: 5px;
+    background-color: #ccccff;
+    margin-bottom: 10px;
+}
+
+.saga-grid div,a {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15;
+    border-radius: 5px;
+    background-color: #3344aa;
+}
+
+div.read {
+    background-color: #22bb22;
+}
+
+div.reading {
+    background-color: #ecac00;
+}
+
+div.owned {
+    background-color: #3399cc;
+}
+
+div.not-owned {
+    color: #666666;
+    background-color: #eeeeee;
+}

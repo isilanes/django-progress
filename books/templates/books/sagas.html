@@ -7,10 +7,13 @@
 <br><br>
 
 {% for saga in sagas %}
-<div>{{saga}}</div>
-{% for book in saga.book_set.all %}
-<div>#{{book.index_in_saga}} {{book}}</div>
-{% endfor %}
+<div class="saga-head">{{saga}}</div>
+
+<div class="saga-grid">
+    {% for book in saga.books %}
+    <div class="{{book.status}}">#{{book.index_in_saga}} {{book}}</div>
+    {% endfor %}
+</div>
 {% endfor %}
 
 {% endblock %}

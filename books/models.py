@@ -20,6 +20,14 @@ class Author(models.Model):
 class Saga(models.Model):
     name = models.CharField('Name', max_length=300)
 
+    # Public properties:
+    @property
+    def books(self):
+        """Return sorted list of books in saga."""
+
+        return self.book_set.all().order_by("index_in_saga")
+
+    # Special methods:
     def __str__(self):
         return self.name
 
@@ -55,6 +63,18 @@ class Book(models.Model):
         """List of events regarding book, sorted by date."""
 
         return Event.objects.filter(book=self).order_by("when").select_subclasses()
+
+    @property
+    def status(self):
+        """Whether book is not owned, owned but not read, reading, or read."""
+
+        if self.is_already_read:
+            return "read"
+
+        if self.is_currently_being_read:
+            return "reading"
+
+        return "not-owned"
 
     @property
     def is_currently_being_read(self):
