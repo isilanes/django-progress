@@ -2,8 +2,8 @@
 
 {% block content %}
 
+<div class="banner">Book detail: {{book}}</div>
 {% include "books/top_menu.html" %}
-{% include "books/bokeh_header.html" %}
 
 <head>
     {{ progress_plot_script | safe }}
@@ -61,17 +61,6 @@
         <td style="text-align: left">{{event}}</td>
     </tr>
     {% endfor %}
-</table>
-
-<br>
-
-<table>
-    <tr>
-        <td>{{ progress_plot_div | safe }}</td>
-    </tr>
-    <tr>
-        <td>{{ rate_plot_div | safe }}</td>
-    </tr>
 </table>
 
 {% endblock %}

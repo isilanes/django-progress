@@ -42,6 +42,7 @@ class Book(models.Model):
     pages = models.IntegerField("Pages", default=1)
     year = models.IntegerField("Year", default=1)
     index_in_saga = models.IntegerField("Index in saga", default=1)
+    owned = models.BooleanField("Owned", default=True)
 
     # Public methods:
     def mark_read(self):
@@ -73,6 +74,9 @@ class Book(models.Model):
 
         if self.is_currently_being_read:
             return "reading"
+
+        if self.owned:
+            return "owned"
 
         return "not-owned"
 
