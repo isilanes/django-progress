@@ -1,38 +1,3 @@
-table, th, td {
-    border: 0px solid blue;
-}
-
-table {
-    font-size: 250%;
-    position: center;
-    border-collapse: collapse;
-    border-spacing: 25px 2px;
-}
-
-table.normal {
-    font-size: 250%;
-    position: center;
-    border-collapse: collapse;
-    border-spacing: 25px 2px;
-}
-
-table.medium {
-    font-size: 150%;
-}
-
-th {
-    /*height: 50px;*/
-    background-color: #7766ff;
-    color: white;
-    padding: 5px 10px;
-    text-align: left;
-}
-
-.normal td {
-    vertical-align: center;
-    padding: 5px 20px;
-}
-
 button.modify {
     border: none;
     color: white;
@@ -138,9 +103,28 @@ input.submit {
     grid-gap: 5px;
 }
 
+.stats-color {
+    color: #ffffff;
+    background-color: #8f2d56;
+}
+
+.index-color {
+    color: #ffffff;
+    background-color: #4ea7ff;
+}
+
+.sagas-color {
+    color: #ffffff;
+    background-color: #d81159;
+}
+
+.add-color {
+    color: #ffffff;
+    background-color: #218380;
+}
+
 .top-buttons-grid a {
     border: none;
-    color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -149,7 +133,6 @@ input.submit {
     line-height: 80px;
     font-size: 40;
     border-radius: 10px;
-    background-color: #3344aa;
 }
 
 .saga-grid {
@@ -161,16 +144,16 @@ input.submit {
 
 .saga-head {
     border: none;
-    color: #3344aa;
+    color: #000066;
+    background-color: #809bce;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     width: 100%;
-    height: 30px;
+    height: 35px;
     line-height: 30px;
-    font-size: 15;
+    font-size: 25;
     border-radius: 5px;
-    background-color: #ccccff;
     margin-bottom: 10px;
 }
 
@@ -183,24 +166,25 @@ input.submit {
     width: 100%;
     height: 30px;
     line-height: 30px;
-    font-size: 15;
+    font-size: 20;
     border-radius: 5px;
     background-color: #3344aa;
 }
 
 div.read {
-    background-color: #22bb22;
+    background-color: #95b8d1;
 }
 
 div.reading {
-    background-color: #ecac00;
+    background-color: #b8e0d2;
 }
 
 div.owned {
-    background-color: #3399cc;
+    background-color: #d6eadf;
 }
 
 div.not-owned {
     color: #666666;
     background-color: #eeeeee;
 }
+
