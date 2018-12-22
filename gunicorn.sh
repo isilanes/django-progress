@@ -1,8 +1,9 @@
 # Define variables:
 PORT=$1
+PNAME=django-progress
 NAME=DjangoProgress
 GUNICORN=gunicorn
-DBDIR=$HOME/db/$NAME
+DBDIR=$HOME/db/$PNAME
 ACCESS_LOG=$DBDIR/access.log
 GUNICORN_LOG=$DBDIR/gunicorn.log
 
