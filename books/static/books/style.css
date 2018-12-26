@@ -103,6 +103,11 @@ input.submit {
     grid-gap: 5px;
 }
 
+.home-color {
+    color: #ffffff;
+    background-color: #718380;
+}
+
 .stats-color {
     color: #ffffff;
     background-color: #8f2d56;
@@ -142,6 +147,17 @@ input.submit {
     grid-gap: 5px;
 }
 
+.two-col-grid-book {
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #ceecff;
+}
+
 .saga-head {
     border: none;
     color: #000066;
@@ -158,7 +174,7 @@ input.submit {
     margin-top: 20px;
 }
 
-.saga-grid div,a {
+.saga-grid div {
     border: none;
     color: white;
     text-align: center;
@@ -169,7 +185,8 @@ input.submit {
     line-height: 30px;
     font-size: 20;
     border-radius: 5px;
-    background-color: #3344aa;
+    //background-color: #3344aa;
+    background-color: #ff44aa;
 }
 
 div.read {

@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 div.banner {
     top: 0;
     left: 0;
@@ -15,6 +19,22 @@ div.banner {
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     grid-gap: 20px;
+}
+
+.two-col-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    grid-gap: 10px;
+    font-size: 35px;
+}
+
+.three-col-grid {
+    display: grid;
+    grid-template-columns: 50% 1fr 1fr;
+    justify-items: center;
+    grid-gap: 10px;
+    font-size: 35px;
 }
 
 .main-buttons-grid a {
@@ -56,9 +76,7 @@ div.banner {
 }
 
 .button-books {
+    color: white;
     background-color: #3344aa;
 }
 
-a {
-    text-decoration: none;
-}
