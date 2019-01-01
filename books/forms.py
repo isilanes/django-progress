@@ -1,9 +1,6 @@
 # Django libs:
 from django import forms
 
-# Our libs:
-from .models import Author
-
 
 # Forms:
 class BookForm(forms.Form):
@@ -15,3 +12,5 @@ class AddBookForm(forms.Form):
     author = forms.CharField(label="Author(s)")
     pages = forms.IntegerField(label="Pages")
     year = forms.IntegerField(label="Year")
+    saga = forms.CharField(label="Saga")
+    index = forms.CharField(label="Index in saga")

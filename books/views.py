@@ -1,10 +1,7 @@
 # Django libs:
 from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
-
-# Bokeh libs:
-from bokeh.plotting import figure
-from bokeh.embed import components
 
 # Our libs:
 from . import statistics
@@ -43,15 +40,9 @@ def book_detail(request, book_id):
     """Detail view for a book."""
 
     book = Book.objects.get(pk=book_id)
-    progress_plot_script, progress_plot_div = components(mk_book_progress_plot(book))
-    rate_plot_script, rate_plot_div = components(mk_page_rate_plot(book))
 
     context = {
         "book": book,
-        "progress_plot_script": progress_plot_script,
-        "progress_plot_div": progress_plot_div,
-        "rate_plot_script": rate_plot_script,
-        "rate_plot_div": rate_plot_div,
      }
 
     return render(request, "books/book_detail.html", context)
@@ -96,6 +87,14 @@ def add_book(request):
                 book.title = title
                 book.pages = form.cleaned_data.get("pages")
                 book.year = form.cleaned_data.get("year")
+                s = form.cleaned_data.get("saga")
+                try:
+                    book.saga = Saga.objects.get(name=s)
+                except ObjectDoesNotExist:
+                    s = Saga(name=s)
+                    s.save()
+                    book.saga = s
+                book.index_in_saga = form.cleaned_data.get("index")
                 book.save()  # we must save BEFORE we add many-to-many field items (author(s) below)
 
                 # Add author data:

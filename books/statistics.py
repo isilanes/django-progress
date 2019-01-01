@@ -10,7 +10,7 @@ class State(object):
     """Encapsulate all State stuff."""
 
     # Class variables:
-    GOAL = 50  # how many books I want to read, per year
+    GOAL = 36  # how many books I want to read, per year
 
     # Constructor:
     def __init__(self, year):
@@ -135,6 +135,8 @@ class State(object):
 
             # Add fraction of pages read, if currently reading:
             if book.is_currently_being_read:
+                if book.pages == 0:
+                    return 0, 0
                 books_this_year += book.pages_read / book.pages
                 pages_this_year += book.pages_read
 
