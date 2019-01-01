@@ -11,7 +11,10 @@
 <form action="{% url 'books:add_book' %}" method="post" class="add-book">
     {% csrf_token %}
     {% bootstrap_form form layout="vertical" %}
-    <input type="submit" class="submit" value="Submit">
+    <input type="submit" class="submit" name="wished" value="Wished">
+    <input type="submit" class="submit" name="ordered" value="Ordered">
+    <input type="submit" class="submit" name="acquired" value="Acquired">
+    <input type="submit" class="submit" name="reading" value="Reading">
 </form>
 
 {% endblock %}

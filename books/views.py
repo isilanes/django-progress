@@ -87,14 +87,20 @@ def add_book(request):
                 book.title = title
                 book.pages = form.cleaned_data.get("pages")
                 book.year = form.cleaned_data.get("year")
+
+                if "acquired" not in request.POST and "reading" not in request.POST:
+                    book.owned = False
+
+                # Saga info:
                 s = form.cleaned_data.get("saga")
-                try:
-                    book.saga = Saga.objects.get(name=s)
-                except ObjectDoesNotExist:
-                    s = Saga(name=s)
-                    s.save()
-                    book.saga = s
-                book.index_in_saga = form.cleaned_data.get("index")
+                if s:
+                    try:
+                        book.saga = Saga.objects.get(name=s)
+                    except ObjectDoesNotExist:
+                        s = Saga(name=s)
+                        s.save()
+                        book.saga = s
+                    book.index_in_saga = form.cleaned_data.get("index")
                 book.save()  # we must save BEFORE we add many-to-many field items (author(s) below)
 
                 # Add author data:
@@ -108,16 +114,19 @@ def add_book(request):
                     book.authors.add(author)
 
                 # Add started reading:
-                start = BookStartEvent()
-                start.book = book
-                start.when = timezone.now()
-                start.save()
+                if "reading" in request.POST:
+                    start = BookStartEvent()
+                    start.book = book
+                    start.when = timezone.now()
+                    start.save()
 
                 return redirect("books:book_detail", book_id=book.id)
 
     initial = {
         "pages": 0,
         "year": 0,
+        "saga": None,
+        "index": None,
     }
     form = AddBookForm(initial=initial)
 
