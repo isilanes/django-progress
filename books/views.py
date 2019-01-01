@@ -15,6 +15,7 @@ def index(request):
 
     context = {
         "currently_reading_books": currently_reading_books(),
+        "currently_ordered_books": currently_ordered_books(),
         "already_read_books": already_read_books(),
     }
 
@@ -176,60 +177,6 @@ def stats(request, year=None):
 
 
 # Helper functions:
-def mk_book_progress_plot(book):
-    """Generate and return Bokeh plot object for book page progress."""
-
-    # Plot data:
-    X, Y = [], []
-    for event in book.events:
-        x = event.when
-        y = event.page_equivalent
-        X.append(x)
-        Y.append(y)
-
-    # Build plot:
-    plot = figure(title="Reading progress",
-                  x_axis_label='Date',
-                  y_axis_label='Pages read',
-                  x_axis_type="datetime",
-                  width=900)
-
-    plot.line(X, Y, legend='pages', line_width=2)
-
-    return plot
-
-
-def mk_page_rate_plot(book):
-    """Generate and return Bokeh plot object for book page read rate."""
-
-    # Plot data:
-    X, Y = [], []
-    previous_p = previous_t = None
-    for event in book.events:
-        x = event.when
-        y = event.page_equivalent
-        dy = 0
-        if previous_p is not None:
-            dy = 86400 * (y - previous_p) / (x - previous_t).total_seconds()
-
-        previous_t = x
-        previous_p = y
-
-        X.append(x)
-        Y.append(dy)
-
-    # Build plot:
-    plot = figure(title="Reading rate",
-                  x_axis_label='Date',
-                  x_axis_type="datetime",
-                  y_axis_label='pages/day',
-                  width=900)
-
-    plot.line(X, Y, line_width=2)
-
-    return plot
-
-
 def currently_reading_books():
     """Return list of books currently being read, unsorted."""
 
@@ -242,3 +189,8 @@ def already_read_books():
     return [y for x, y in sorted([(book.date_read, book) for book in Book.objects.all()
                                   if book.is_already_read], reverse=True)]
 
+
+def currently_ordered_books():
+    """Return list of books currently ordered, but not yet received, unsorted."""
+
+    return [book for book in Book.objects.all() if book.ordered]

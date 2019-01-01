@@ -33,7 +33,7 @@ class SagaAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    fields = ["title", "authors", "pages", "year", "saga", "index_in_saga", "owned"]
+    fields = ["title", "authors", "pages", "year", "saga", "index_in_saga", "owned", "ordered"]
     list_display = ("title", "year")
     search_fields = ["title"]
     inlines = [BookStartInline, PageUpdateInline, BookEndInline]

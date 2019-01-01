@@ -147,6 +147,22 @@ input.submit {
     grid-gap: 5px;
 }
 
+.book-detail-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+    justify-items: center;
+    grid-gap: 10px;
+    font-size: 35px;
+}
+
+.index-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr;
+    justify-items: center;
+    grid-gap: 10px;
+    font-size: 25px;
+}
+
 .two-col-grid-book {
     border: none;
     color: black;

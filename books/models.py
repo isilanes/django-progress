@@ -43,6 +43,7 @@ class Book(models.Model):
     year = models.IntegerField("Year", default=1)
     index_in_saga = models.IntegerField("Index in saga", default=1)
     owned = models.BooleanField("Owned", default=True)
+    ordered = models.BooleanField("Ordered", default=False)
 
     # Public methods:
     def mark_read(self):

@@ -37,14 +37,6 @@ div.banner {
     font-size: 35px;
 }
 
-.book-detail-grid {
-    display: grid;
-    grid-template-columns: 0.5fr 1.5fr;
-    justify-items: center;
-    grid-gap: 10px;
-    font-size: 35px;
-}
-
 .three-col-grid-text {
     width: 100%;
     align-self: start;
@@ -58,6 +50,7 @@ div.banner {
 .two-col-grid-text {
     width: 100%;
     align-self: start;
+    padding: 2px 5px;
 }
 
 .main-buttons-grid a {

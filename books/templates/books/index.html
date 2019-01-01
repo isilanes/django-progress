@@ -7,32 +7,37 @@
 
 <br><br>
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Pages read</th>
-    </tr>
+{% if currently_reading_books %}
+<div class="index-grid" style="width: 800px">
+    <div class="two-col-grid-text button-books">Currently reading</div>
+    <div class="two-col-grid-text button-books">Pages read</div>
     {% for book in currently_reading_books %}
-    <tr>
-        <td><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></td>
-        <td style="text-align: right">{{book.pages_read}}</td>
-    </tr>
+        <div class="two-col-grid-text"><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></div>
+        <div class="two-col-grid-number">{{book.pages_read}}</div>
     {% endfor %}
-</table>
-
+</div>
 <br><br>
+{% endif %}
 
-<table class="medium">
-    <tr>
-        <th>Title</th>
-        <th>Date</th>
-    </tr>
-    {% for book in already_read_books %}
-    <tr>
-        <td><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></td>
-        <td>{{book.date_read|date:"Y-m-d H:i"}}</td>
-    </tr>
+{% if currently_ordered_books %}
+<div class="index-grid" style="width: 800px">
+    <div class="two-col-grid-text button-books">Currently ordered</div>
+    <div></div>
+    {% for book in currently_ordered_books %}
+    <div class="two-col-grid-text"><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></div>
+    <div></div>
     {% endfor %}
-</table>
+</div>
+<br><br>
+{% endif %}
+
+<div class="index-grid" style="width: 800px">
+    <div class="two-col-grid-text button-books">Already read</div>
+    <div class="two-col-grid-text button-books">Date finished</div>
+    {% for book in already_read_books %}
+        <div class="two-col-grid-text"><a href="{% url 'books:book_detail' book.id %}">{{book.title}}</a></div>
+        <div>{{book.date_read|date:"Y-m-d H:i"}}</div>
+    {% endfor %}
+</div>
 
 {% endblock %}
