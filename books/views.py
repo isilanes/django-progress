@@ -92,6 +92,9 @@ def add_book(request):
                 if "acquired" not in request.POST and "reading" not in request.POST:
                     book.owned = False
 
+                if "ordered" in request.POST:
+                    book.ordered = True
+
                 # Saga info:
                 s = form.cleaned_data.get("saga")
                 if s:
