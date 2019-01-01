@@ -5,7 +5,7 @@
 <div class="banner stats-color">Statistics</div>
 {% include "books/top_menu.html" %}
 
-<div class="two-col-grid" style="width: 500px; margin-top: 25px;">
+<div class="two-col-grid" style="width: 900px; margin-top: 25px;">
     <div>Title</div>
     <div>Pages read</div>
 
@@ -18,8 +18,8 @@
 </div>
 
 <div class="three-col-grid" style="width: 800px; margin-top: 50px;">
-    <div>Books read:</div>
-    <div style="text-align: right">{{state.books_read|floatformat:1}}</div>
+    <div class="three-col-grid-text">Books read:</div>
+    <div class="three-col-grid-number">{{state.books_read|floatformat:1}}</div>
 
     {% if state.book_superavit_percent > 0 %}
     <div style="text-align: right; color: green">(+
@@ -29,32 +29,37 @@
     {{state.book_superavit_percent|floatformat:+2}} %)
     </div>
 
-    <div>Books per week:</div>
-    <div style="text-align: right">{{state.books_per_week|floatformat:2}}</div>
+    <div class="three-col-grid-text">Books per week:</div>
+    <div class="three-col-grid-number">{{state.books_per_week|floatformat:2}}</div>
     <div></div>
 
-    <div>Pages read:</div>
-    <div style="text-align: right">{{state.pages_read}}</div>
+    <div class="three-col-grid-text">Pages read:</div>
+    <div class="three-col-grid-number">{{state.pages_read}}</div>
     <div></div>
 
-    <div>Pages read per day:</div>
-    <div style="text-align: right">{{state.pages_per_day|floatformat:1}}</div>
+    <div class="three-col-grid-text">Pages read per day:</div>
+    <div class="three-col-grid-number">{{state.pages_per_day|floatformat:1}}</div>
     <div></div>
 
-    <div>Pages per book:</div>
-    <div style="text-align: right">{{state.pages_per_book|floatformat:1}}</div>
+    <div class="three-col-grid-text">Pages per book:</div>
+    <div class="three-col-grid-number">{{state.pages_per_book|floatformat:1}}</div>
     <div></div>
 
-    <div>Books to read:</div>
-    <div style="text-align: right">{{state.required_books|floatformat:1}}</div>
+    <div><br></div>
+    <div></div>
     <div></div>
 
-    <div>Books per week required:</div>
-    <div style="text-align: right">{{state.required_books_per_week|floatformat:2}}</div>
+
+    <div class="three-col-grid-text">Books to read:</div>
+    <div class="three-col-grid-number">{{state.required_books|floatformat:1}}</div>
     <div></div>
 
-    <div>Daily pages required:</div>
-    <div style="text-align: right">{{state.required_pages_per_day|floatformat:1}}</div>
+    <div class="three-col-grid-text">Books per week required:</div>
+    <div class="three-col-grid-number">{{state.required_books_per_week|floatformat:2}}</div>
+    <div></div>
+
+    <div class="three-col-grid-text">Daily pages required:</div>
+    <div class="three-col-grid-number">{{state.required_pages_per_day|floatformat:1}}</div>
 </div>
 
 {% endblock %}

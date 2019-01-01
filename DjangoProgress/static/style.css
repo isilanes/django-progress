@@ -37,6 +37,29 @@ div.banner {
     font-size: 35px;
 }
 
+.book-detail-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+    justify-items: center;
+    grid-gap: 10px;
+    font-size: 35px;
+}
+
+.three-col-grid-text {
+    width: 100%;
+    align-self: start;
+}
+
+.three-col-grid-number {
+    width: 100%;
+    text-align: right;
+}
+
+.two-col-grid-text {
+    width: 100%;
+    align-self: start;
+}
+
 .main-buttons-grid a {
     border: none;
     color: white;

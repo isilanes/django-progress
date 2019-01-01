@@ -2,44 +2,26 @@
 
 {% block content %}
 
-<div class="banner">Book detail: {{book}}</div>
+<div class="banner">{{book}}</div>
 {% include "books/top_menu.html" %}
-
-<head>
-    {{ progress_plot_script | safe }}
-    {{ rate_plot_script | safe }}
-</head>
 
 <br><br>
 
-<table class="normal">
-    <tr>
-        <th>Title:</th>
-        <td>{{ book.title }}</td>
-    </tr>
-    <tr>
-        <th>Author:</th>
-        <td>
-            {% for author in book.authors.all %}
-            <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </td>
-    </tr>
-    <tr>
-        <th>Pages:</th>
-        <td>{{ book.pages }}</td>
-    </tr>
-    <tr>
-        <th>Published:</th>
-        <td style="padding: 5px 20px;">{{ book.year }}</td>
-    </tr>
+<div class="book-detail-grid" style="width: 800px">
+    <div class="two-col-grid-text">Title:</div><div class="two-col-grid-text">{{ book.title }}</div>
+    <div class="two-col-grid-text">Author:</div>
+    <div class="two-col-grid-text">
+        {% for author in book.authors.all %}
+        <a href="{% url 'books:author_detail' author.id %}">{{ author }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+    <div class="two-col-grid-text">Pages:</div><div class="two-col-grid-text">{{ book.pages }}</div>
+    <div class="two-col-grid-text">Published:</div><div class="two-col-grid-text">{{ book.year }}</div>
+
     {% if book.saga %}
-    <tr>
-        <th>Saga:</th>
-        <td style="padding: 5px 20px;">{{ book.saga }} #{{book.index_in_saga}}</td>
-    </tr>
+    <div class="two-col-grid-text">Saga:</div><div class="two-col-grid-text">{{ book.saga }} #{{book.index_in_saga}}</div>
     {% endif %}
-</table>
+</div>
 
 <br>
 
@@ -50,17 +32,12 @@
 
 <br>
 
-<table class="normal">
-    <tr>
-        <th>Date</th>
-        <th style="text-align: left">Event</th>
-    </tr>
+<div class="book-detail-grid" style="width: 800px; font-size: 25px">
+    <div class="two-col-grid-text">Date</div><div class="two-col-grid-text">Event</div>
+
     {% for event in book.events %}
-    <tr>
-        <td>{{event.when|date:"Y-m-d H:i" }}</td>
-        <td style="text-align: left">{{event}}</td>
-    </tr>
+    <div class="two-col-grid-text">{{event.when|date:"Y-m-d H:i" }}</div><div class="two-col-grid-text">{{event}}</div>
     {% endfor %}
-</table>
+</div>
 
 {% endblock %}
