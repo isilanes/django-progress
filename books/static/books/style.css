@@ -176,8 +176,8 @@ input.submit {
 
 .saga-head {
     border: none;
-    color: #000066;
-    background-color: #809bce;
+    color: #ffffff;
+    background-color: #304b8e;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -206,7 +206,7 @@ input.submit {
 }
 
 div.read {
-    background-color: #096b72;
+    background-color: #59cb92;
 }
 
 div.reading {
@@ -214,11 +214,11 @@ div.reading {
 }
 
 div.owned {
-    background-color: #9899a6;
+    background-color: #88a9e6;
 }
 
 div.not-owned {
     color: #666666;
-    background-color: #eeeeee;
+    background-color: #feeeee;
 }
 

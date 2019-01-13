@@ -70,6 +70,9 @@ class Book(models.Model):
     def status(self):
         """Whether book is not owned, owned but not read, reading, or read."""
 
+        if self.ordered:
+            return "ordered"
+
         if self.is_already_read:
             return "read"
 

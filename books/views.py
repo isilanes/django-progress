@@ -25,13 +25,8 @@ def index(request):
 def sagas(request):
     """Saga view."""
 
-    sagas = Saga.objects.all()
-    for saga in sagas:
-        print(saga)
-        print(saga.book_set.all())
-
     context = {
-        "sagas": sagas,
+        "sagas": Saga.objects.all(),
     }
 
     return render(request, "books/sagas.html", context)

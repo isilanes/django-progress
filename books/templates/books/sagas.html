@@ -12,7 +12,7 @@
 
 <div class="saga-grid">
     {% for book in saga.books %}
-    <div class="{{book.status}}">#{{book.index_in_saga}} {{book}}</div>
+    <div class="{{book.status}}"><a href="{% url 'books:book_detail' book.id %}" style="color: #111111;">#{{book.index_in_saga}} {{book}}</a></div>
     {% endfor %}
 </div>
 {% endfor %}
