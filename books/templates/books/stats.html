@@ -22,9 +22,9 @@
     <div class="three-col-grid-number">{{state.books_read|floatformat:1}}</div>
 
     {% if state.book_superavit_percent > 0 %}
-    <div style="text-align: right; color: green">(+
+    <div class="three-col-grid-text" style="text-align: right; color: green">(+
         {% else %}
-    <div style="text-align: right; color: red">(
+    <div class="three-col-grid-text" style="text-align: right; color: red">(
     {% endif %}
     {{state.book_superavit_percent|floatformat:+2}} %)
     </div>
