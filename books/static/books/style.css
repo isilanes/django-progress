@@ -145,6 +145,7 @@ input.submit {
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     grid-gap: 5px;
+    margin-bottom: 30px;
 }
 
 .book-detail-grid {
@@ -187,7 +188,6 @@ input.submit {
     font-size: 25;
     border-radius: 5px;
     margin-bottom: 10px;
-    margin-top: 20px;
 }
 
 .saga-grid div {
@@ -222,3 +222,23 @@ div.not-owned {
     background-color: #feeeee;
 }
 
+button.toggle {
+    border: none;
+    color: #ccffcc;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 100%;
+    background-color: transparent;
+}
+
+.header {
+    justify-self: stretch;
+    font-weight: bold;
+    font-size: 30px;
+    background-color: #7766ff;
+    color: white;
+    margin-bottom: 10;
+    padding: 5;
+}

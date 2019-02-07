@@ -5,17 +5,68 @@
 <div class="banner sagas-color">Sagas</div>
 {% include "books/top_menu.html" %}
 
-<br><br>
+<br>
 
-{% for saga in sagas %}
+<div class="header">
+    {{completed|length}} sagas completed
+    <button class="toggle" onclick="mytoggle('show_saga_completed')">[toggle show]</button>
+</div>
+
+<div id="show_saga_completed" style="display: none;">
+    {% for saga in completed %}
+    <div class="saga-head">{{saga}}</div>
+
+    <div class="saga-grid">
+        {% for book in saga.books %}
+        <div class="{{book.status}}">
+            <a href="{% url 'books:book_detail' book.id %}" style="color: #111111;">#{{book.index_in_saga}} {{book}}</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="header">
+    {{owned|length}} sagas owned
+    <button class="toggle" onclick="mytoggle('show_saga_owned')">[toggle show]</button>
+</div>
+
+<div id="show_saga_owned" style="display: none;">
+{% for saga in owned %}
 <div class="saga-head">{{saga}}</div>
 
 <div class="saga-grid">
     {% for book in saga.books %}
-    <div class="{{book.status}}"><a href="{% url 'books:book_detail' book.id %}" style="color: #111111;">#{{book.index_in_saga}} {{book}}</a></div>
+    <div class="{{book.status}}">
+        <a href="{% url 'books:book_detail' book.id %}" style="color: #111111;">#{{book.index_in_saga}} {{book}}</a>
+    </div>
     {% endfor %}
 </div>
 {% endfor %}
+</div>
+
+
+<div class="header">
+    {{missing|length}} sagas missing one or more books
+    <button class="toggle" onclick="mytoggle('show_saga_missing')">[toggle show]</button>
+</div>
+
+<div id="show_saga_missing" style="display: none;">
+
+    {% for saga in missing %}
+    <div class="saga-head">{{saga}}</div>
+
+    <div class="saga-grid">
+        {% for book in saga.books %}
+        <div class="{{book.status}}">
+            <a href="{% url 'books:book_detail' book.id %}" style="color: #111111;">#{{book.index_in_saga}} {{book}}</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+</div>
 
 {% endblock %}
 

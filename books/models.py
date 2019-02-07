@@ -27,6 +27,26 @@ class Saga(models.Model):
 
         return self.book_set.all().order_by("index_in_saga")
 
+    @property
+    def completed(self):
+        """True if all books in saga read. False otherwise."""
+
+        for book in self.books:
+            if not book.is_already_read:
+                return False
+
+        return True
+
+    @property
+    def owned(self):
+        """True if all books in saga owned (read or not). False otherwise."""
+
+        for book in self.books:
+            if not book.owned:
+                return False
+
+        return True
+
     # Special methods:
     def __str__(self):
         return self.name

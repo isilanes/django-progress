@@ -27,6 +27,9 @@ def sagas(request):
 
     context = {
         "sagas": Saga.objects.all(),
+        "completed": completed_sagas(),
+        "owned": owned_sagas(),
+        "missing": missing_sagas(),
     }
 
     return render(request, "books/sagas.html", context)
@@ -192,3 +195,17 @@ def currently_ordered_books():
     """Return list of books currently ordered, but not yet received, unsorted."""
 
     return [book for book in Book.objects.all() if book.ordered]
+
+
+def completed_sagas():
+    return [s for s in Saga.objects.all() if s.completed]
+
+
+def owned_sagas():
+    return [s for s in Saga.objects.all() if not s.completed and s.owned]
+
+
+def missing_sagas():
+    """Sagas with one or more books missing."""
+
+    return [s for s in Saga.objects.all() if not s.completed and not s.owned]
