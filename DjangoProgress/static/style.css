@@ -21,14 +21,6 @@ div.banner {
     grid-gap: 20px;
 }
 
-.two-col-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    grid-gap: 10px;
-    font-size: 35px;
-}
-
 .three-col-grid {
     display: grid;
     grid-template-columns: 50% 1fr 1fr;

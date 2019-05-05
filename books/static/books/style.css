@@ -1,4 +1,4 @@
-button.modify {
+a.modify {
     border: none;
     color: white;
     text-align: center;
@@ -9,6 +9,20 @@ button.modify {
     line-height: 100px;
     font-size: 40px;
     border-radius: 8px;
+    background-color: #34aa66;
+}
+
+a.modify-condensed {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+    border-radius: 5px;
     background-color: #34aa66;
 }
 
@@ -96,6 +110,15 @@ input.submit {
     background-color: #34aa66;
 }
 
+.stats-book-grid {
+    display: grid;
+    grid-template-columns: 0.6fr 0.2fr 0.2fr;
+    justify-items: center;
+    grid-gap: 10px;
+    font-size: 35px;
+}
+
+
 .top-buttons-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -164,7 +187,7 @@ input.submit {
     font-size: 25px;
 }
 
-.two-col-grid-book {
+.stats-book-grid-book {
     border: none;
     color: black;
     text-align: center;
@@ -173,6 +196,8 @@ input.submit {
     width: 100%;
     border-radius: 15px;
     background-color: #ceecff;
+    height: 50px;
+    line-height: 50px;
 }
 
 .saga-head {

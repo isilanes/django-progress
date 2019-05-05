@@ -25,12 +25,9 @@
 
 <br>
 
-<form action="{% url 'books:modify_book' book.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="modify">Modify</button>
-</form>
+<a class="modify" href="{% url 'books:modify_book' book.id %}">Update</a>
 
-<br>
+<br><br><br>
 
 <div class="book-detail-grid" style="width: 800px; font-size: 25px">
     <div class="two-col-grid-text">Date</div><div class="two-col-grid-text">Event</div>

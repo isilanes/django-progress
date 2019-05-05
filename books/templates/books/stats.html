@@ -5,15 +5,17 @@
 <div class="banner stats-color">Statistics</div>
 {% include "books/top_menu.html" %}
 
-<div class="two-col-grid" style="width: 900px; margin-top: 25px;">
+<div class="stats-book-grid" style="width: 90%; margin-top: 25px;">
     <div>Title</div>
     <div>Pages read</div>
+    <div></div>
 
     {% for book in currently_reading_books %}
-    <a class="two-col-grid-book" href="{% url 'books:book_detail' book.id %}">
+    <a class="stats-book-grid-book" href="{% url 'books:book_detail' book.id %}">
         {{book.title}}
     </a>
     <div style="text-align: right">{{book.pages_read}}</div>
+    <a class="modify-condensed" href="{% url 'books:modify_book' book.id %}">Update</a>
     {% endfor %}
 </div>
 
