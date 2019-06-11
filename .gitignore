@@ -2,8 +2,10 @@ __pycache__
 *.swp
 *.pyc
 /static/
+media/
 backup
 .idea
 *nonfree*
 gasolina/static
 ahorro/static
+uwsgi/progress_rpi.ini
