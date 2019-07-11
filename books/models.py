@@ -108,21 +108,10 @@ class Book(models.Model):
     def is_currently_being_read(self):
         """Returns True if it is currently being read. False otherwise."""
 
-        starts = BookStartEvent.objects.filter(book=self).count()
-        ends = BookEndEvent.objects.filter(book=self).count()
+        starts = BookStartEvent.objects.filter(book=self)
+        ends = BookEndEvent.objects.filter(book=self)
 
-        return starts > ends
-
-        return False
-
-        being_read = False
-        for event in self.events:
-            if isinstance(event, BookStartEvent):
-                being_read = True
-            elif isinstance(event, BookEndEvent):
-                being_read = False
-
-        return being_read
+        return starts.count() > ends.count()
 
     @property
     def is_already_read(self):
