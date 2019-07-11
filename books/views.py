@@ -164,6 +164,10 @@ def author_detail(request, author_id=None):
 def stats(request, year=None):
     """View with statistics for 'year'."""
 
+    from datetime import datetime
+
+    t0 = datetime.now()
+
     # If no year given, use current:
     if year is None:
         year = timezone.now().year
@@ -173,6 +177,10 @@ def stats(request, year=None):
         "state": statistics.State(year),
         "currently_reading_books": currently_reading_books(),
     }
+
+    t1 = datetime.now()
+    print("DT1", t1-t0)
+    t0 = t1
 
     return render(request, "books/stats.html", context)
 
