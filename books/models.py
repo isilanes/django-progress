@@ -136,6 +136,11 @@ class Book(models.Model):
         return pages
 
     @property
+    def percent_read(self):
+
+        return 100. * self.pages_read / self.pages
+
+    @property
     def date_read(self):
         """Return date of most recent time we finished reading it. None if never."""
 
