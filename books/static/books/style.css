@@ -112,7 +112,7 @@ input.submit {
 
 .stats-book-grid {
     display: grid;
-    grid-template-columns: 0.8fr 0.2fr;
+    grid-template-columns: 0.9fr 0.1fr;
     justify-items: center;
     grid-gap: 10px;
     font-size: 35px;

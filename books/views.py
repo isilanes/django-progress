@@ -168,10 +168,16 @@ def stats(request, year=None):
     if year is None:
         year = timezone.now().year
 
+    state = statistics.State(year)
+
+    ppd, rppd = state.pages_per_day, state.required_pages_per_day
+    ppd_perc = 100. * ppd / (ppd + rppd)
+
     context = {
         "year": year,
-        "state": statistics.State(year),
+        "state": state,
         "currently_reading_books": currently_reading_books(),
+        "pages_per_day": [ppd, rppd, ppd_perc, 100. - ppd_perc]
     }
 
     return render(request, "books/stats.html", context)
