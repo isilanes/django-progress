@@ -5,7 +5,7 @@
 <div class="banner stats-color">Statistics</div>
 {% include "books/top_menu.html" %}
 
-<div class="stats-book-grid" style="width: 100%; margin-top: 35px; margin-left: 10px;">
+<div class="stats-book-grid" style="margin-top: 35px; margin-left: 10px; margin-right: 10px;">
     {% for book in currently_reading_books %}
     <a class="stats-book-grid-book" href="{% url 'books:book_detail' book.id %}">
         {{book.title}}
@@ -44,26 +44,15 @@
              aria-valuemin="0" aria-valuemax="100">{{pages_per_day.1|floatformat:1}} ppd</div>
         {% endif %}
     </div>
+
+    <div class="progress bg-secondary" style="width: 100%; height: 50px; font-size: 30px; grid-column: span 2;">
+        <div class="progress-bar" role="progressbar" style="width: {{perc_total_pages}}%;" aria-valuenow="100"
+             aria-valuemin="0" aria-valuemax="100">{{state.pages_read}} pages read</div>
+    </div>
+
+    <div class="progress bg-secondary" style="width: 100%; height: 50px; font-size: 30px; grid-column: span 2;">
+        <div class="progress-bar" role="progressbar" style="width: {{perc_ppb}}%;" aria-valuenow="100"
+             aria-valuemin="0" aria-valuemax="100">{{state.pages_per_book|floatformat:1}} pages per book</div>
+    </div>
 </div>
-
-
-<div class="three-col-grid" style="width: 800px; margin-top: 50px;">
-    <div class="three-col-grid-text">Pages read:</div>
-    <div class="three-col-grid-number">{{state.pages_read}}</div>
-    <div></div>
-
-    <div class="three-col-grid-text">Pages per book:</div>
-    <div class="three-col-grid-number">{{state.pages_per_book|floatformat:1}}</div>
-    <div></div>
-
-    <div><br></div>
-    <div></div>
-    <div></div>
-
-
-    <div class="three-col-grid-text">Books to read:</div>
-    <div class="three-col-grid-number">{{state.required_books|floatformat:1}}</div>
-    <div></div>
-</div>
-
 {% endblock %}
