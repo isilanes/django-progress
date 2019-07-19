@@ -10,15 +10,14 @@
 
 <br>
 
-<form action="{% url 'books:modify_book' book.id %}" method="post">
+<form action="{% url 'books:modify_book' book.id %}" method="post" style="margin-left: 10px;">
     {% csrf_token %}
     {{ form }}
     <input type="submit" class="submit" value="Submit">
 </form>
 
-<form action="{% url 'books:mark_book_read' book.id %}" method="post">
+<form action="{% url 'books:mark_book_read' book.id %}" method="post" style="margin-left: 10px;">
     {% csrf_token %}
     <button type="submit" class="mark-read">Mark read</button>
 </form>
-
 {% endblock %}

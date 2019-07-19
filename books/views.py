@@ -57,7 +57,10 @@ def modify_book(request, book_id):
         if form.is_valid():
             pages_read = form.cleaned_data.get("pages_read")
             if pages_read is not None:
+                if not book.is_currently_being_read:
+                    book.mark_started()
                 book.set_pages(pages_read)
+
                 return redirect("books:book_detail", book_id=book_id)
 
     initial = {

@@ -72,6 +72,12 @@ class Book(models.Model):
         end = BookEndEvent(book=self, when=timezone.now())
         end.save()
 
+    def mark_started(self):
+        """Mark self as started to read."""
+
+        start = BookStartEvent(book=self, when=timezone.now())
+        start.save()
+
     def set_pages(self, pages=None):
         """Mark 'pages' as pages read. Do nothing if 'None'."""
 
