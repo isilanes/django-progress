@@ -139,6 +139,16 @@ def add_book(request):
     return render(request, 'books/add_book.html', context)
 
 
+def start_book(request):
+    """View to start reading a book."""
+
+    context = {
+        "unread_books": [b for b in Book.objects.filter(owned=True) if not b.is_already_read],
+    }
+
+    return render(request, "books/start_book.html", context)
+
+
 def mark_book_read(request, book_id):
     """Come here with a POST to mark a book read."""
 

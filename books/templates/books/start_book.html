@@ -1,0 +1,17 @@
+{% extends "books/header.html" %}
+
+{% block content %}
+<div class="banner index-color">Start reading a book</div>
+{% include "books/top_menu.html" %}
+
+<br>
+
+<div class="saga-grid">
+    {% for book in unread_books %}
+    <div class="{{book.status}}">
+        <a href="{% url 'books:book_detail' book.id %}" style="color: #111111;">{{book}}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
