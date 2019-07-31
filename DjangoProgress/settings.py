@@ -2,10 +2,6 @@
 import os
 import json
 
-# Our libs:
-from . import core
-
-
 # You can specify multiple configuration files to be checked in order.
 # The first one found will be used.
 try_confs = [
@@ -26,11 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = J['SECRET_KEY']
+#SECRET_KEY = J['SECRET_KEY']
+SECRET_KEY = "whatever"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = J["DEBUG"]
-ALLOWED_HOSTS = J["ALLOWED_HOSTS"]
+#DEBUG = J["DEBUG"]
+DEBUG = True
+#ALLOWED_HOSTS = J["ALLOWED_HOSTS"]
+ALLOWED_HOSTS = []
 
 # Application definition:
 INSTALLED_APPS = [
@@ -41,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-] + J.get("MY_INSTALLED_APPS", [])
+] + ["gasolina", "ahorro", "books", "pesos"]
+#] + J.get("MY_INSTALLED_APPS", [])
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,10 +83,6 @@ DATABASES = {
         'NAME': 'django-progress',
         'USER': 'django',
         'HOST': 'localhost',
-    },
-    'ignore': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': J["DBFILE"],
     }
 }
 
