@@ -79,6 +79,12 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 # Database:
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django-progress',
+        'USER': 'django',
+        'HOST': 'localhost',
+    },
+    'ignore': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': J["DBFILE"],
     }
