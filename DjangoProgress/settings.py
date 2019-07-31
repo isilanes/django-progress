@@ -29,7 +29,7 @@ SECRET_KEY = "whatever"
 #DEBUG = J["DEBUG"]
 DEBUG = True
 #ALLOWED_HOSTS = J["ALLOWED_HOSTS"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition:
 INSTALLED_APPS = [
