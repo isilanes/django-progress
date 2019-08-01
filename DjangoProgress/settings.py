@@ -7,13 +7,14 @@ import json
 try_confs = [
     os.environ.get("DJANGO_PROGRESS_CONF", None),
     os.path.join(os.environ["HOME"], ".django-progress.json"),
-    os.path.join("conf", "django-progress.json"),
 ]
 
+# Get configuration from JSON file (or keep default, empty):
+conf_dict = {}
 for conf in try_confs:
     if conf and os.path.isfile(conf):
         with open(conf, 'r') as f:
-            J = json.load(f)
+            conf_dict = json.load(f)
         break
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,14 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = J['SECRET_KEY']
-SECRET_KEY = "whatever"
+SECRET_KEY = conf_dict.get("SECRET_KEY") or os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = J["DEBUG"]
-DEBUG = True
-#ALLOWED_HOSTS = J["ALLOWED_HOSTS"]
-ALLOWED_HOSTS = ["*"]
+DEBUG = conf_dict.get("DEBUG") or False
+ALLOWED_HOSTS = conf_dict.get("ALLOWED_HOSTS") or ["*"]
 
 # Application definition:
 INSTALLED_APPS = [
@@ -40,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-] + ["gasolina", "ahorro", "books", "pesos"]
-#] + J.get("MY_INSTALLED_APPS", [])
+] + conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,11 +75,20 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 
 # Database:
 DATABASES = {
-    'default': {
+    'heroku': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd7qbdmterqbajj',
+    },
+    'sqlite3': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': conf_dict.get("DBFILE"),
     }
 }
+
+if conf_dict.get("WHICH_DB", None):
+    DATABASES["default"] = DATABASES[conf_dict.get("WHICH_DB")]
+else:
+    DATABASES["default"] = DATABASES["heroku"]
 
 
 # Password validation:
@@ -117,6 +123,6 @@ STATICFILES_DIRS = [
 ]
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
+#import dj_database_url
+#db_from_env = dj_database_url.config(conn_max_age=500)
 #DATABASES['default'].update(db_from_env)
