@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = conf_dict.get("SECRET_KEY") or os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = conf_dict.get("DEBUG") or False
+DEBUG = conf_dict.get("DEBUG") or os.environ.get("DEBUG", False)
 ALLOWED_HOSTS = conf_dict.get("ALLOWED_HOSTS") or ["*"]
 
 # Application definition:
