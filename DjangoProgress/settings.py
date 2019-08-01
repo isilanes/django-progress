@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'bootstrap4',
 ]
 EXTRA_APPS = conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
-if EXTRA_APPS:
-    INSTALLED_APPS += EXTRA_APPS
+INSTALLED_APPS += EXTRA_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
