@@ -17,5 +17,5 @@ urlpatterns = [
 ]
 
 # Apps:
-#for app in settings.EXTRA_APPS:
-    #urlpatterns.append(path(f'{app}/', include(f'{app}.urls', namespace=app)))
+for app in settings.EXTRA_APPS:
+    urlpatterns.append(path(f'{app}/', include(f'{app}.urls', namespace=app)))
