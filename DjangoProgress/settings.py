@@ -80,7 +80,8 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 DATABASES = {
     'heroku': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7qbdmterqbajj',
+        #'NAME': 'd7qbdmterqbajj',
+        'NAME': 'd8jc2u569ga6jt',
     },
     'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
