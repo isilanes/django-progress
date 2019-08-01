@@ -155,7 +155,10 @@ def import_books(all_data, options):
             book = Book(pk=k)
             book.save()
 
-        book.authors.add(*[Author.objects.get(pk=pk) for pk in val.get("author_pks", [])])
+        try:
+            book.authors.add(*[Author.objects.get(pk=pk) for pk in val.get("author_pks", [])])
+        except ObjectDoesNotExist:
+            pass
         book.title = val["title"]
         book.pages = val["pages"]
         book.year = val["year"]
