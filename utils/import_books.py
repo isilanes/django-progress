@@ -21,7 +21,7 @@ def homed(file_name):
     return os.path.join(os.environ.get("HOME"), file_name)
 
 
-def import_authors(in_fn=homed("authors.json")):
+def import_authors(in_fn="authors.json"):
     with open(in_fn) as f:
         authors = json.load(f)
 
@@ -35,7 +35,7 @@ def import_authors(in_fn=homed("authors.json")):
         author.name = val["name"]
         msg = f"Imported [AUTHOR] {author}"
         print(msg)
-        author.save()
+        #author.save()
 
 
 def import_books(in_fn=homed("books.json")):
@@ -115,7 +115,7 @@ def import_book_end_events(in_fn=homed("book_end_events.json")):
 # Main:
 if __name__ == "__main__":
     import_authors()
-    import_books()
-    import_book_start_events()
-    import_page_update_events()
-    import_book_end_events()
+    #import_books()
+    #import_book_start_events()
+    #import_page_update_events()
+    #import_book_end_events()
