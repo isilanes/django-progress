@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-] #+ ["gasolina", "books", "pesos", "ahorro"]
-
+] + ["gasolina", "books", "pesos", "ahorro"]
 #EXTRA_APPS = conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
 #if EXTRA_APPS:
 #    INSTALLED_APPS += EXTRA_APPS
@@ -81,6 +80,7 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 AVAILABLE_DATABASES = {
     'heroku': {
         'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'd7qbdmterqbajj',
         'NAME': 'd8jc2u569ga6jt',
     },
     'sqlite3': {
