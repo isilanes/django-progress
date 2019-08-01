@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-] + conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
+] + conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a] or []
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
