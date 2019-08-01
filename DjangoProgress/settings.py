@@ -77,24 +77,23 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 
 
 # Database:
-DATABASES = {
+AVAILABLE_DATABASES = {
     'heroku': {
         'ENGINE': 'django.db.backends.postgresql',
         #'NAME': 'd7qbdmterqbajj',
         'NAME': 'd8jc2u569ga6jt',
     },
-    #'sqlite3': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': conf_dict.get("DBFILE"),
-    #}
+    'sqlite3': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': conf_dict.get("DBFILE"),
+    }
 }
+DATABASES = {}
 
 if conf_dict.get("WHICH_DB", None):
     DATABASES["default"] = DATABASES[conf_dict.get("WHICH_DB")]
 else:
     DATABASES["default"] = DATABASES["heroku"]
-
-DATABASES["default"] = DATABASES["heroku"]
 
 
 # Password validation:
