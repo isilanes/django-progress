@@ -94,6 +94,8 @@ if conf_dict.get("WHICH_DB", None):
 else:
     DATABASES["default"] = DATABASES["heroku"]
 
+DATABASES["default"] = DATABASES["heroku"]
+
 
 # Password validation:
 AUTH_PASSWORD_VALIDATORS = [
