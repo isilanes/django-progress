@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
 ] + ["gasolina", "books", "pesos", "ahorro"]
-#EXTRA_APPS = conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
-#if EXTRA_APPS:
-#    INSTALLED_APPS += EXTRA_APPS
+EXTRA_APPS = conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
+if EXTRA_APPS:
+    INSTALLED_APPS += EXTRA_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +80,6 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 AVAILABLE_DATABASES = {
     'heroku': {
         'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'd7qbdmterqbajj',
         'NAME': 'd8jc2u569ga6jt',
     },
     'sqlite3': {
@@ -128,6 +127,6 @@ STATICFILES_DIRS = [
 ]
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#import dj_database_url
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
