@@ -14,7 +14,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DjangoProgress.settings")
 django.setup()
 
 # Our libs:
-from books.models import Author, Book, BookStartEvent, BookEndEvent, PageUpdateEvent
+from books.models import Author, Book, Saga, BookStartEvent, BookEndEvent, PageUpdateEvent
 
 
 # Functions:
@@ -47,6 +47,11 @@ def parse_args(args=sys.argv[1:]):
 
     parser.add_argument("--books",
                         help="Import/export only books. Default: import/export all.",
+                        action="store_true",
+                        default=False)
+
+    parser.add_argument("--sagas",
+                        help="Import/export only sagas. Default: import/export all.",
                         action="store_true",
                         default=False)
 
@@ -83,6 +88,18 @@ def export_books():
         }
 
     return book_dict
+
+
+def export_sagas():
+    saga_json = {}
+    for saga in Saga.objects.all():
+        msg = f"Exporting [SAGA] {saga}"
+        print(msg)
+        saga_json[saga.id] = {
+            "name": saga.name
+        }
+
+    return saga_json
 
 
 def export_book_start_events():
@@ -170,6 +187,25 @@ def import_books(all_data, options):
             book.save()
 
 
+def import_sagas(all_data, options):
+    """"Import sagas from JSON data."""
+
+    for k, val in all_data["sagas"].items():
+        # If already there, overwrite:
+        try:
+            saga = Saga.objects.get(pk=k)
+        except ObjectDoesNotExist:
+            saga = Saga(pk=k)
+
+        saga.name = val["name"]
+
+        msg = f"Imported [SAGA] {saga}"
+        print(msg)
+
+        if not options.dry_run:
+            saga.save()
+
+
 def import_book_start_events(all_data, options):
     """Import book start event data from JSON data."""
 
@@ -238,7 +274,7 @@ if __name__ == "__main__":
 
         # Export all, or only specified tables:
         export_all = True
-        if opts.authors or opts.books or opts.events:
+        if opts.authors or opts.books or opts.events or opts.sagas:
             export_all = False
 
         if opts.authors or export_all:
@@ -252,6 +288,9 @@ if __name__ == "__main__":
             data["update_events"] = export_page_update_events()
             data["end_events"] = export_book_end_events()
 
+        if opts.sagas or export_all:
+            data["sagas"] = export_sagas()
+
         # Save to file:
         with open(opts.fn, "w") as f:
             json.dump(data, f)
@@ -263,7 +302,7 @@ if __name__ == "__main__":
 
         # Import all, or only specified tables:
         import_all = True
-        if opts.authors or opts.books or opts.events:
+        if opts.authors or opts.books or opts.events or opts.sagas:
             import_all = False
 
         if opts.authors or import_all:
@@ -276,3 +315,6 @@ if __name__ == "__main__":
             import_book_start_events(data, opts)
             import_page_update_events(data, opts)
             import_book_end_events(data, opts)
+
+        if opts.sagas or import_all:
+            import_sagas(data, opts)
