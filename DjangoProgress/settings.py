@@ -91,9 +91,9 @@ AVAILABLE_DATABASES = {
 DATABASES = {}
 
 if conf_dict.get("WHICH_DB", None):
-    DATABASES["default"] = DATABASES[conf_dict.get("WHICH_DB")]
+    DATABASES["default"] = AVAILABLE_DATABASES[conf_dict.get("WHICH_DB")]
 else:
-    DATABASES["default"] = DATABASES["heroku"]
+    DATABASES["default"] = AVAILABLE_DATABASES["heroku"]
 
 
 # Password validation:
