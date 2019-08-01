@@ -275,3 +275,4 @@ if __name__ == "__main__":
         if opts.events or import_all:
             import_book_start_events(data, opts)
             import_page_update_events(data, opts)
+            import_book_end_events(data, opts)
