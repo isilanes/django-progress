@@ -80,7 +80,6 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 AVAILABLE_DATABASES = {
     'heroku': {
         'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'd7qbdmterqbajj',
         'NAME': 'd8jc2u569ga6jt',
     },
     'sqlite3': {
@@ -96,7 +95,7 @@ else:
     # Heroku: Update database configuration from $DATABASE_URL.
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=500)
-    #DATABASES["default"] = AVAILABLE_DATABASES["heroku"]
+    DATABASES["default"] = AVAILABLE_DATABASES["heroku"]
     DATABASES['default'].update(db_from_env)
 
 
