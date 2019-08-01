@@ -93,7 +93,11 @@ DATABASES = {}
 if conf_dict.get("WHICH_DB", None):
     DATABASES["default"] = AVAILABLE_DATABASES[conf_dict.get("WHICH_DB")]
 else:
-    DATABASES["default"] = AVAILABLE_DATABASES["heroku"]
+    # Heroku: Update database configuration from $DATABASE_URL.
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    #DATABASES["default"] = AVAILABLE_DATABASES["heroku"]
+    DATABASES['default'].update(db_from_env)
 
 
 # Password validation:
@@ -126,8 +130,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "DjangoProgress", "static"),
 ]
-
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
