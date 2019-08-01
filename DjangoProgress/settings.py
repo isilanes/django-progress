@@ -83,10 +83,10 @@ DATABASES = {
         #'NAME': 'd7qbdmterqbajj',
         'NAME': 'd8jc2u569ga6jt',
     },
-    'sqlite3': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': conf_dict.get("DBFILE"),
-    }
+    #'sqlite3': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': conf_dict.get("DBFILE"),
+    #}
 }
 
 if conf_dict.get("WHICH_DB", None):
