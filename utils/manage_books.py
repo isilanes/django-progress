@@ -85,7 +85,14 @@ def export_books():
             "title": book.title,
             "pages": book.pages,
             "year": book.year,
+            "i_saga": book.index_in_saga,
+            "owned": book.owned,
+            "ordered": book.ordered,
         }
+        if book.saga is None:
+            book_dict[book.id]["saga"] = None
+        else:
+            book_dict[book.id]["saga"] = book.saga.pk
 
     return book_dict
 
@@ -165,20 +172,31 @@ def import_books(all_data, options):
     """Import books from JSON data."""
 
     for k, val in all_data["books"].items():
-        # If already there, overwrite:
+        # If already present, overwrite:
         try:
             book = Book.objects.get(pk=k)
         except ObjectDoesNotExist:
             book = Book(pk=k)
             book.save()
 
+        # Get author:
         try:
             book.authors.add(*[Author.objects.get(pk=pk) for pk in val.get("author_pks", [])])
         except ObjectDoesNotExist:
             pass
+
+        # Get saga:
+        try:
+            book.saga = Saga.objects.get(pk=val["saga"])
+        except ObjectDoesNotExist:
+            pass
+
         book.title = val["title"]
         book.pages = val["pages"]
         book.year = val["year"]
+        book.index_in_saga = val["i_saga"]
+        book.owned = val["owned"]
+        book.ordered = val["ordered"]
 
         msg = f"Imported [BOOK] {book}"
         print(msg)

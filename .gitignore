@@ -9,3 +9,4 @@ backup
 gasolina/static
 ahorro/static
 uwsgi/progress_rpi.ini
+utils/books.json
