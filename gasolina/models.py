@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 # Classes:
 class PlotState(models.Model):
     """The values of all plot variables."""
@@ -13,17 +14,13 @@ class PlotState(models.Model):
     litres = models.FloatField("Litres", default=0)
     price = models.FloatField("Price (eur/L)", default=0)
     
-    # Public functions:
-    def plottable_attributes(self):
-        return ["total_kms", "partial_kms", "litres", "price"]
-
-
     # Special functions:
     def __str__(self):
         return "{s.timestamp}".format(s=self)
 
     def __unicode__(self):
         return self.__str__()
+
 
 class VariableConfig(models.Model):
     """The configuration parameters for a variable."""
