@@ -100,3 +100,19 @@ td {
     background-color: #d0d0ff;
 }
 
+.top-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+    grid-gap: 5px;
+}
+.top-buttons-grid a {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    line-height: 60px;
+    font-size: 40;
+    border-radius: 10px;
+}
