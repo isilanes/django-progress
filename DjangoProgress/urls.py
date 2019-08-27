@@ -3,6 +3,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+# Our libs:
+from DjangoProgress import settings
+
 
 # URL patterns:
 urlpatterns = [
@@ -11,10 +14,8 @@ urlpatterns = [
 
     # Main:
     path('', TemplateView.as_view(template_name="main_index.html"), name="main_index"),
-
-    # Apps:
-    path('gasolina/', include('gasolina.urls', namespace="gasolina")),
-    path('ahorro/', include('ahorro.urls', namespace="ahorro")),
-    path('pesos/', include('pesos.urls', namespace="pesos")),
-    path('books/', include('books.urls', namespace="books")),
 ]
+
+# Apps:
+for app in settings.EXTRA_APPS:
+    urlpatterns.append(path(f'{app}/', include(f'{app}.urls', namespace=app)))

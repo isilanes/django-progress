@@ -2,22 +2,19 @@
 import os
 import json
 
-# Our libs:
-from . import core
-
-
 # You can specify multiple configuration files to be checked in order.
 # The first one found will be used.
 try_confs = [
     os.environ.get("DJANGO_PROGRESS_CONF", None),
     os.path.join(os.environ["HOME"], ".django-progress.json"),
-    os.path.join("conf", "django-progress.json"),
 ]
 
+# Get configuration from JSON file (or keep default, empty):
+conf_dict = {}
 for conf in try_confs:
     if conf and os.path.isfile(conf):
         with open(conf, 'r') as f:
-            J = json.load(f)
+            conf_dict = json.load(f)
         break
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = J['SECRET_KEY']
+SECRET_KEY = conf_dict.get("SECRET_KEY") or os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = J["DEBUG"]
-ALLOWED_HOSTS = J["ALLOWED_HOSTS"]
+DEBUG = conf_dict.get("DEBUG") or (os.environ.get("DEBUG") == "True")
+ALLOWED_HOSTS = conf_dict.get("ALLOWED_HOSTS") or ["*"]
 
 # Application definition:
 INSTALLED_APPS = [
@@ -41,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-] + J.get("MY_INSTALLED_APPS", [])
+]
+
+# Get extra apps either from JSON config (local), or from env variable (heroku):
+EXTRA_APPS = conf_dict.get("MY_INSTALLED_APPS") or [a for a in os.environ.get("INSTALLED_APPS", "").split(":") if a]
+if EXTRA_APPS:
+    INSTALLED_APPS += EXTRA_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,12 +79,26 @@ WSGI_APPLICATION = 'DjangoProgress.wsgi.application'
 
 
 # Database:
-DATABASES = {
-    'default': {
+AVAILABLE_DATABASES = {
+    'heroku': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd8jc2u569ga6jt',
+    },
+    'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': J["DBFILE"],
+        'NAME': conf_dict.get("DBFILE"),
     }
 }
+DATABASES = {}
+
+if conf_dict.get("WHICH_DB", None):
+    DATABASES["default"] = AVAILABLE_DATABASES[conf_dict.get("WHICH_DB")]
+else:
+    # Heroku: Update database configuration from $DATABASE_URL.
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES["default"] = AVAILABLE_DATABASES["heroku"]
+    DATABASES['default'].update(db_from_env)
 
 
 # Password validation:

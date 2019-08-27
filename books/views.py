@@ -184,7 +184,10 @@ def stats(request, year=None):
     state = statistics.State(year)
 
     ppd, rppd = state.pages_per_day, state.required_pages_per_day
-    ppd_perc = 100. * ppd / (ppd + rppd)
+    try:
+        ppd_perc = 100. * ppd / (ppd + rppd)
+    except ZeroDivisionError:
+        ppd_perc = 0.0
     total_pages = 15000
     pages_per_book = 600
     perc_total_pages = 100. * state.pages_read / total_pages
