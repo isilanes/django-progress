@@ -1,10 +1,15 @@
 {% load static %}
 
-<div class="top-buttons-grid" style="width: 100%">
-    <a class="button-books" href="/">Home</a>
-    <a class="stats-color" href="{% url 'books:stats' %}">Stats</a>
-    <a class="index-color" href="{% url 'books:index' %}">Index</a>
-    <a class="sagas-color" href="{% url 'books:sagas' %}">Sagas</a>
-    <a class="index-color" href="{% url 'books:start_book' %}">Start</a>
-    <a class="add-color" href="{% url 'books:add_book' %}">Add</a>
+<div class="btn-group ml-3 my-3">
+    <a class="btn btn-success btn-lg" href="/">Home</a>
+</div>
+
+<div class="btn-group ml-3 col-0">
+    <a class="btn btn-secondary btn-lg" href="{% url 'books:stats' %}">Stats</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'books:index' %}">Index</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'books:sagas' %}">Sagas</a>
+</div>
+<div class="btn-group ml-3 col-0">
+    <a class="btn btn-primary btn-lg" href="{% url 'books:start_book' %}">Start</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'books:add_book' %}">Add</a>
 </div>

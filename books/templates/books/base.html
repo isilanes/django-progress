@@ -1,12 +1,12 @@
 {% load static %}
-{% load bootstrap4 %}
 
 <head>
-    {% bootstrap_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'books/style.css' %}" />
     <link rel="shortcut icon" type="image/png" href="{% static 'books/icons/favicon.png' %}"/>
     <script src="{% static 'books/js/myjs.js' %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 {% block content %}
