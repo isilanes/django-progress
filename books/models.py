@@ -134,12 +134,14 @@ class Book(models.Model):
 
     @property
     def pages_read(self):
+        """How many pages read so far. Only interesting for books currently being read."""
 
-        pages = 0
-        for event in self.events:
-            pages = event.page_equivalent
+        last_event = PageUpdateEvent.objects.filter(book=self).order_by("when").last()
 
-        return pages
+        if last_event is not None:
+            return last_event.pages_read
+
+        return 0
 
     @property
     def percent_read(self):

@@ -1,8 +1,8 @@
-# Standard libs:
 from datetime import datetime
 
-# Our libs:
-from .models import Book, BookEndEvent
+from django.db.models import Sum
+
+from .models import Book, BookEndEvent, BookStartEvent
 
 
 # Classes:
@@ -130,11 +130,23 @@ class State(object):
     def _books_and_pages_so_far(self):
         """Number of books and pages read during year."""
 
+        # Stats from finished books:
+        end_events_query_set = BookEndEvent.objects.filter(when__year=self.year)
+        finished_books_query_set = Book.objects.filter(event__in=end_events_query_set)
+        bty = finished_books_query_set.count()
+        pty = finished_books_query_set.aggregate(Sum('pages'))["pages__sum"]
+
+        # Stats from books currently being read:
+        start_events_query_set = BookStartEvent.objects.filter(when__year=self.year)
+        started_books_query_set = Book.objects.filter(event__in=start_events_query_set)
+        reading_books_query_set = started_books_query_set.difference(finished_books_query_set)
+        #pr = reading_books_query_set.aggregate(Sum('pages_read'))
+        #print(pr)
+
         books_this_year = 0
         pages_this_year = 0
 
         for book in Book.objects.all():
-
             # Add 1 full book for each time book has been read this year:
             for end in BookEndEvent.objects.filter(book=book):
                 if end.when.year == self.year:
@@ -143,10 +155,9 @@ class State(object):
 
             # Add fraction of pages read, if currently reading:
             if book.is_currently_being_read:
-                if book.pages == 0:
-                    return 0, 0
-                books_this_year += book.pages_read / book.pages
-                pages_this_year += book.pages_read
+                if book.pages != 0:
+                    books_this_year += book.pages_read / book.pages
+                    pages_this_year += book.pages_read
 
         return books_this_year, pages_this_year
 

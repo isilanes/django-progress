@@ -1,9 +1,7 @@
-# Django libs:
 from django.db import models
 from django.utils import timezone
 
 
-# Classes:
 class PlotState(models.Model):
     """The values of all plot variables."""
 
@@ -37,4 +35,3 @@ class VariableConfig(models.Model):
 
     def __unicode__(self):
         return self.__str__()
-

@@ -181,9 +181,13 @@ def stats(request, year=None):
     if year is None:
         year = timezone.now().year
 
+    from datetime import datetime
     state = statistics.State(year)
 
+    t0 = datetime.now()
     ppd, rppd = state.pages_per_day, state.required_pages_per_day
+    t1 = datetime.now()
+    print("DEBUG193", t1-t0)
     try:
         ppd_perc = 100. * ppd / (ppd + rppd)
     except ZeroDivisionError:
@@ -192,6 +196,8 @@ def stats(request, year=None):
     pages_per_book = 600
     perc_total_pages = 100. * state.pages_read / total_pages
     perc_ppb = 100. * state.pages_per_book / pages_per_book
+    t1 = datetime.now()
+    print("DEBUG203", t1-t0)
 
     context = {
         "year": year,
@@ -201,6 +207,8 @@ def stats(request, year=None):
         "perc_total_pages": perc_total_pages,
         "perc_ppb": perc_ppb,
     }
+    t1 = datetime.now()
+    print("DEBUG203", t1-t0)
 
     return render(request, "books/stats.html", context)
 
