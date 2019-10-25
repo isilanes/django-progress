@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 # Our libs:
 from . import statistics
-from .models import Book, Author, BookStartEvent, Saga
+from .models import Book, Author, BookStartEvent, Saga, BookEndEvent
 from .forms import BookForm, AddBookForm
 
 
@@ -181,14 +181,10 @@ def stats(request, year=None):
     if year is None:
         year = timezone.now().year
 
-    from datetime import datetime
     state = statistics.State(year)
 
-    t0 = datetime.now()
     pages_per_day = state.pages_per_day
     required_pages_per_day = state.required_pages_per_day
-    t1 = datetime.now()
-    print("DEBUG193", t1-t0)
 
     try:
         ppd_perc = 100. * pages_per_day / (pages_per_day + required_pages_per_day)
@@ -199,8 +195,6 @@ def stats(request, year=None):
     pages_per_book = 600
     perc_total_pages = 100. * state.pages_read / total_pages
     perc_ppb = 100. * state.pages_per_book / pages_per_book
-    t1 = datetime.now()
-    print("DEBUG203", t1-t0)
 
     context = {
         "year": year,
@@ -210,17 +204,21 @@ def stats(request, year=None):
         "perc_total_pages": perc_total_pages,
         "perc_ppb": perc_ppb,
     }
-    t1 = datetime.now()
-    print("DEBUG203", t1-t0)
 
     return render(request, "books/stats.html", context)
 
 
 # Helper functions:
 def currently_reading_books():
-    """Return list of books currently being read, unsorted."""
+    """Return query set of books currently being read, unsorted."""
 
-    return [book for book in Book.objects.all() if book.is_currently_being_read]
+    end_events_query_set = BookEndEvent.objects.all()
+    finished_books_query_set = Book.objects.filter(event__in=end_events_query_set)
+
+    start_events_query_set = BookStartEvent.objects.filter()
+    started_books_query_set = Book.objects.filter(event__in=start_events_query_set)
+
+    return started_books_query_set.difference(finished_books_query_set)
 
 
 def already_read_books():

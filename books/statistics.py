@@ -145,4 +145,3 @@ class State(object):
             books_this_year += book.pages_read / book.pages
 
         return books_this_year, pages_this_year
-
