@@ -185,13 +185,16 @@ def stats(request, year=None):
     state = statistics.State(year)
 
     t0 = datetime.now()
-    ppd, rppd = state.pages_per_day, state.required_pages_per_day
+    pages_per_day = state.pages_per_day
+    required_pages_per_day = state.required_pages_per_day
     t1 = datetime.now()
     print("DEBUG193", t1-t0)
+
     try:
-        ppd_perc = 100. * ppd / (ppd + rppd)
+        ppd_perc = 100. * pages_per_day / (pages_per_day + required_pages_per_day)
     except ZeroDivisionError:
         ppd_perc = 0.0
+
     total_pages = 15000
     pages_per_book = 600
     perc_total_pages = 100. * state.pages_read / total_pages
@@ -203,7 +206,7 @@ def stats(request, year=None):
         "year": year,
         "state": state,
         "currently_reading_books": currently_reading_books(),
-        "pages_per_day": [ppd, rppd, ppd_perc, 100. - ppd_perc],
+        "pages_per_day": [pages_per_day, required_pages_per_day, ppd_perc, 100. - ppd_perc],
         "perc_total_pages": perc_total_pages,
         "perc_ppb": perc_ppb,
     }
