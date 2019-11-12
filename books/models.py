@@ -157,6 +157,12 @@ class Book(models.Model):
         except IndexError:
             return None
 
+    @property
+    def list_of_authors(self):
+        """Return Authors as a list of strings."""
+
+        return [a.name for a in self.authors.all()]
+
     # Special properties:
     def __str__(self):
         return self.title

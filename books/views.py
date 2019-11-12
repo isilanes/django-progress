@@ -74,7 +74,7 @@ def update_book_progress(request, book_id):
 
 
 def add_book(request):
-    """Form to add a book."""
+    """Form to add a new Book."""
 
     if request.method == "POST":
         form = AddBookForm(request.POST or None)
@@ -131,12 +131,66 @@ def add_book(request):
         "index": None,
     }
     form = AddBookForm(initial=initial)
+    context = {"form": form}
+
+    return render(request, 'books/add_or_modify_book.html', context)
+
+
+def modify_book(request, book_id=None):
+    """Form to modify a Book."""
+
+    if request.method == "POST":
+        form = AddBookForm(request.POST or None)
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            if title is not None:
+                book = Book.objects.get(id=book_id)  # book to modify
+                book.title = title
+                book.pages = form.cleaned_data.get("pages")
+                book.year = form.cleaned_data.get("year")
+
+                # Saga info:
+                saga_name = form.cleaned_data.get("saga")
+                if saga_name:
+                    try:
+                        book.saga = Saga.objects.get(name=saga_name)
+                    except ObjectDoesNotExist:
+                        saga_name = Saga(name=saga_name)
+                        saga_name.save()
+                        book.saga = saga_name
+                    book.index_in_saga = form.cleaned_data.get("index")
+                book.save()  # we must save BEFORE we add many-to-many field items (author(s) below)
+
+                # Add author data:
+                author_names = [a.strip() for a in form.cleaned_data.get("author", "").split(",")]
+                for author_name in author_names:
+                    try:
+                        author = Author.objects.get(name=author_name)
+                    except Author.DoesNotExist:
+                        author = Author(name=author_name)
+                        author.save()
+                    book.authors.add(author)
+
+                return redirect("books:book_detail", book_id=book.id)
+
+    book = Book.objects.get(id=book_id)
+    initial = {
+        "title": book.title,
+        "author": ", ".join(book.list_of_authors),
+        "pages": book.pages,
+        "year": book.year,
+        "saga": book.saga,
+        "index": book.index_in_saga,
+    }
+    form = AddBookForm(initial=initial)
 
     context = {
         "form": form,
+        "book": book,
+        "action": "modify",
     }
 
-    return render(request, 'books/add_book.html', context)
+    return render(request, 'books/add_or_modify_book.html', context)
 
 
 def start_book(request):

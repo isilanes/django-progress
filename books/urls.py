@@ -24,8 +24,9 @@ urlpatterns = [
     path('author/<int:author_id>', views.author_detail, name='author_detail'),
 
     # Forms:
+    path('add_book', views.add_book, name='add_book'),
+    path('modify_book/<int:book_id>', views.modify_book, name='modify_book'),
+    path('start_book', views.start_book, name='start_book'),
     path('update_book_progress/<int:book_id>', views.update_book_progress, name='update_book_progress'),
     path('mark_book_read/<int:book_id>', views.mark_book_read, name='mark_book_read'),
-    path('add_book', views.add_book, name='add_book'),
-    path('start_book', views.start_book, name='start_book'),
 ]

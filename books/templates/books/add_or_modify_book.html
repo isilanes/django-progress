@@ -1,0 +1,31 @@
+{% extends "books/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+{% if action == "add" %}
+<div class="banner add-color">Add book</div>
+{% endif %}
+
+{% if action == "modify" %}
+<div class="banner add-color">Modify '{{book.title}}'</div>
+{% endif %}
+{% include "books/top_menu.html" %}
+
+<form action="" method="post" class="add-book ml-3">
+    {% csrf_token %}
+    {% bootstrap_form form layout="vertical" %}
+
+    {% if action == "add" %}
+    <input type="submit" class="submit mt-3" name="wished" value="Wished">
+    <input type="submit" class="submit" name="ordered" value="Ordered">
+    <input type="submit" class="submit" name="acquired" value="Acquired">
+    <input type="submit" class="submit" name="reading" value="Reading">
+    {% endif %}
+
+    {% if action == "modify" %}
+    <input type="submit" class="submit mt-3" name="modify" value="Modify">
+    {% endif %}
+    <a class="btn btn-warning btn-lg ml-3" href="{% url 'books:book_detail' book.id %}">Cancel</a>
+</form>
+
+{% endblock %}

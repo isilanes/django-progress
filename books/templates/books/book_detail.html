@@ -19,7 +19,7 @@
     {% endif %}
 </div>
 
-<a class="btn btn-primary btn-lg mt-3 ml-3" href="{% url 'books:update_book_progress' book.id %}">Modify</a>
+<a class="btn btn-primary btn-lg mt-3 ml-3" href="{% url 'books:modify_book' book.id %}">Modify</a>
 <a class="btn btn-success btn-lg mt-3 ml-2" href="{% url 'books:update_book_progress' book.id %}">Update</a>
 
 <div class="book-detail-grid mt-5 ml-3" style="width: 800px; font-size: 25px">
