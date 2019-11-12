@@ -212,6 +212,16 @@ def mark_book_read(request, book_id):
     return redirect("books:book_detail", book_id=book_id)
 
 
+def mark_book_owned(request, book_id):
+    """Come here with a GET to mark a Book as owned."""
+
+    book = Book.objects.get(pk=book_id)
+    book.owned = True
+    book.save()
+
+    return redirect("books:book_detail", book_id=book_id)
+
+
 def author_detail(request, author_id=None):
     """Detail view for an author."""
 
