@@ -1,15 +1,12 @@
-# Django libs:
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 
-# Our libs:
 from . import statistics
 from .models import Book, Author, BookStartEvent, Saga, BookEndEvent
 from .forms import BookForm, AddBookForm
 
 
-# Views:
 def index(request):
     """Index view."""
 
@@ -47,7 +44,7 @@ def book_detail(request, book_id):
     return render(request, "books/book_detail.html", context)
 
 
-def modify_book(request, book_id):
+def update_book_progress(request, book_id):
     """Form to modify state of book."""
 
     book = Book.objects.get(pk=book_id)
@@ -73,7 +70,7 @@ def modify_book(request, book_id):
         "book": book,
     }
 
-    return render(request, 'books/modify_book.html', context)
+    return render(request, 'books/update_book_progress.html', context)
 
 
 def add_book(request):
@@ -153,11 +150,10 @@ def start_book(request):
 
 
 def mark_book_read(request, book_id):
-    """Come here with a POST to mark a book read."""
+    """Come here with a GET to mark a book read."""
 
-    if request.method == "POST":
-        book = Book.objects.get(pk=book_id)
-        book.mark_read()
+    book = Book.objects.get(pk=book_id)
+    book.mark_read()
 
     return redirect("books:book_detail", book_id=book_id)
 
@@ -210,15 +206,23 @@ def stats(request, year=None):
 
 # Helper functions:
 def currently_reading_books():
-    """Return query set of books currently being read, unsorted."""
+    """Return list of Books currently being read, unsorted."""
 
-    end_events_query_set = BookEndEvent.objects.all()
-    finished_books_query_set = Book.objects.filter(event__in=end_events_query_set)
+    book_states = {}
 
     start_events_query_set = BookStartEvent.objects.filter()
     started_books_query_set = Book.objects.filter(event__in=start_events_query_set)
 
-    return started_books_query_set.difference(finished_books_query_set)
+    for book in started_books_query_set:
+        book_states[book] = book_states.get(book, 0) + 1
+
+    end_events_query_set = BookEndEvent.objects.all()
+    finished_books_query_set = Book.objects.filter(event__in=end_events_query_set)
+
+    for book in finished_books_query_set:
+        book_states[book] = book_states.get(book, 0) - 1
+
+    return [book for book, state in book_states.items() if state > 0]
 
 
 def already_read_books():

@@ -1,0 +1,16 @@
+{% extends "books/base.html" %}
+
+{% block content %}
+{% include "books/top_menu.html" %}
+
+<div class="banner">Modify book: {{book.title}}</div>
+
+<form action="{% url 'books:update_book_progress' book.id %}" method="post" style="margin-left: 10px;">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="submit" value="Submit">
+</form>
+
+<a class="btn btn-danger btn-lg ml-3" href="{% url 'books:mark_book_read' book.id %}">Mark read</a>
+<a class="btn btn-warning btn-lg ml-3" href="{% url 'books:book_detail' book.id %}">Cancel</a>
+{% endblock %}

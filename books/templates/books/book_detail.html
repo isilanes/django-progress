@@ -1,14 +1,9 @@
 {% extends "books/base.html" %}
 
 {% block content %}
-
-<div class="banner">{{book}}</div>
-
 {% include "books/top_menu.html" %}
 
-<br><br>
-
-<div class="book-detail-grid" style="width: 800px">
+<div class="book-detail-grid mt-1 ml-3" style="width: 800px">
     <div class="two-col-grid-text">Title:</div><div class="two-col-grid-text">{{ book.title }}</div>
     <div class="two-col-grid-text">Author:</div>
     <div class="two-col-grid-text">
@@ -24,18 +19,14 @@
     {% endif %}
 </div>
 
-<br>
+<a class="btn btn-primary btn-lg mt-3 ml-3" href="{% url 'books:update_book_progress' book.id %}">Modify</a>
+<a class="btn btn-success btn-lg mt-3 ml-2" href="{% url 'books:update_book_progress' book.id %}">Update</a>
 
-<a class="modify" href="{% url 'books:modify_book' book.id %}" style="margin-left: 15px;">Update</a>
-
-<br><br><br>
-
-<div class="book-detail-grid" style="width: 800px; font-size: 25px">
+<div class="book-detail-grid mt-5 ml-3" style="width: 800px; font-size: 25px">
     <div class="two-col-grid-text">Date</div><div class="two-col-grid-text">Event</div>
 
     {% for event in book.events %}
     <div class="two-col-grid-text">{{event.when|date:"Y-m-d H:i" }}</div><div class="two-col-grid-text">{{event}}</div>
     {% endfor %}
 </div>
-
 {% endblock %}
