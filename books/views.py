@@ -131,7 +131,10 @@ def add_book(request):
         "index": None,
     }
     form = AddBookForm(initial=initial)
-    context = {"form": form}
+    context = {
+        "form": form,
+        "action": "add",
+    }
 
     return render(request, 'books/add_or_modify_book.html', context)
 

@@ -20,12 +20,13 @@
     <input type="submit" class="submit" name="ordered" value="Ordered">
     <input type="submit" class="submit" name="acquired" value="Acquired">
     <input type="submit" class="submit" name="reading" value="Reading">
+    <a class="btn btn-warning btn-lg ml-3" href="{% url 'books:stats' %}">Cancel</a>
     {% endif %}
 
     {% if action == "modify" %}
     <input type="submit" class="submit mt-3" name="modify" value="Modify">
-    {% endif %}
     <a class="btn btn-warning btn-lg ml-3" href="{% url 'books:book_detail' book.id %}">Cancel</a>
+    {% endif %}
 </form>
 
 {% endblock %}
