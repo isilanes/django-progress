@@ -94,15 +94,14 @@ def add_book(request):
                     book.ordered = True
 
                 # Saga info:
-                s = form.cleaned_data.get("saga")
-                print("DEBUG98", s, form.cleaned_data)
-                if s:
+                saga_name = form.cleaned_data.get("saga")
+                if saga_name:
                     try:
-                        book.saga = Saga.objects.get(name=s)
+                        book.saga = Saga.objects.get(name=saga_name)
                     except ObjectDoesNotExist:
-                        s = Saga(name=s)
-                        s.save()
-                        book.saga = s
+                        saga = Saga(name=saga_name)
+                        saga.save()
+                        book.saga = saga
                     book.index_in_saga = form.cleaned_data.get("index")
                 book.save()  # we must save BEFORE we add many-to-many field items (author(s) below)
 
