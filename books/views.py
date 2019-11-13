@@ -95,6 +95,7 @@ def add_book(request):
 
                 # Saga info:
                 s = form.cleaned_data.get("saga")
+                print("DEBUG98", s, form.cleaned_data)
                 if s:
                     try:
                         book.saga = Saga.objects.get(name=s)
