@@ -99,7 +99,15 @@ def add_book(request):
                     try:
                         book.saga = Saga.objects.get(name=saga_name)
                     except ObjectDoesNotExist:
-                        saga = Saga(name=saga_name)
+                        # Horrible hack to assign to new Saga object the first available id, because PostgreSQL
+                        # at Heroku fails to assign an automatic one that is not duplicated if we simply do:
+                        # saga = Saga(name=saga_name)
+                        saga_id = 1
+                        for saga_id in range(1, 10000):  # max try 10000 sagas
+                            print("DEBUG105", saga_id)
+                            if not Saga.objects.filter(id=saga_id):
+                                break
+                        saga = Saga(name=saga_name, id=saga_id)
                         saga.save()
                         book.saga = saga
                     book.index_in_saga = form.cleaned_data.get("index")
