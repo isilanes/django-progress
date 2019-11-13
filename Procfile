@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn DjangoProgress.wsgi --log-file -
+web: DEBUG=True gunicorn DjangoProgress.wsgi --log-file -
