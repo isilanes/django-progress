@@ -276,6 +276,7 @@ def stats(request, year=None):
     elif state.book_superavit > 0:
         red_bar = 0
         green_bar = state.book_superavit_percent
+        blue_bar = blue_bar - green_bar
     else:
         red_bar = state.book_deficit_percent
         green_bar = 0
