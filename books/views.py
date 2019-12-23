@@ -267,9 +267,29 @@ def stats(request, year=None):
     perc_total_pages = 100. * state.pages_read / total_pages
     perc_ppb = 100. * state.pages_per_book / pages_per_book
 
+    # Books read bar:
+    blue_bar = state.book_percent_read
+    if blue_bar >= 100.0:
+        blue_bar = 100.0
+        red_bar = 0
+        green_bar = 0
+    elif state.book_superavit > 0:
+        red_bar = 0
+        green_bar = state.book_superavit_percent
+    else:
+        red_bar = state.book_deficit_percent
+        green_bar = 0
+
+    books_read_bar = {
+        "blue_bar": blue_bar,
+        "red_bar": red_bar,
+        "green_bar": green_bar,
+    }
+
     context = {
         "year": year,
         "state": state,
+        "books_read_bar": books_read_bar,
         "currently_reading_books": currently_reading_books(),
         "pages_per_day": [pages_per_day, required_pages_per_day, ppd_perc, 100. - ppd_perc],
         "perc_total_pages": perc_total_pages,
