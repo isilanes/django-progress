@@ -143,7 +143,7 @@ class State(object):
         end_events_query_set = BookEndEvent.objects.filter(when__year=self.year)
         finished_books_query_set = Book.objects.filter(event__in=end_events_query_set)
         books_this_year = finished_books_query_set.count()
-        pages_this_year = finished_books_query_set.aggregate(Sum('pages'))["pages__sum"]
+        pages_this_year = finished_books_query_set.aggregate(Sum('pages'))["pages__sum"] or 0  # 0 if None
 
         # Stats from books currently being read:
         start_events_query_set = BookStartEvent.objects.filter(when__year=self.year)
