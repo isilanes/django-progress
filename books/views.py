@@ -287,10 +287,27 @@ def stats(request, year=None):
         "green_bar": green_bar,
     }
 
+    # Expected books bar:
+    if state.expected_books_by_end_of_year > state.GOAL:
+        green_bar = 100. * state.expected_books_by_end_of_year / (2. * state.GOAL)
+        blue_bar = 0
+        red_bar = 0
+    else:
+        red_bar = 100. * state.expected_books_by_end_of_year / (2. * state.GOAL)
+        blue_bar = 50. - red_bar
+        green_bar = 0
+
+    expected_books_bar = {
+        "blue_bar": blue_bar,
+        "red_bar": red_bar,
+        "green_bar": green_bar,
+    }
+
     context = {
         "year": year,
         "state": state,
         "books_read_bar": books_read_bar,
+        "expected_books_bar": expected_books_bar,
         "currently_reading_books": currently_reading_books(),
         "pages_per_day": [pages_per_day, required_pages_per_day, ppd_perc, 100. - ppd_perc],
         "perc_total_pages": perc_total_pages,
