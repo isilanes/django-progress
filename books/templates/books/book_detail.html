@@ -33,7 +33,7 @@
     {% if event.page_equivalent == 0 %}
     <div class="two-col-grid-text">
         <div class="progress" style="width: 100%; height: 50px; font-size: 25px;">
-            <div class="progress-bar bg-danger ml-2" role="progressbar" style="width: 0%"></div>
+            <div class="progress-bar bg-danger ml-0" role="progressbar" style="width: 0%"></div>
         </div>
     </div>
     {% elif event.progress_percent == 100 %}
@@ -46,7 +46,7 @@
     {% else %}
     <div class="two-col-grid-text">
         <div class="progress" style="width: 100%; height: 50px; font-size: 25px;">
-            <div class="progress-bar bg-primary ml-2" role="progressbar" style="width: {{event.progress_percent}}%">
+            <div class="progress-bar bg-primary pl-2" role="progressbar" style="width: {{event.progress_percent}}%">
                 {{event.page_equivalent}}</div>
         </div>
     </div>
