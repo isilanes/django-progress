@@ -25,11 +25,32 @@
 <a class="btn btn-info btn-lg mt-3 ml-2" href="{% url 'books:mark_book_owned' book.id %}">Mark owned</a>
 {% endif %}
 
-<div class="book-detail-grid mt-5 ml-3" style="width: 800px; font-size: 25px">
+<div class="book-detail-grid mt-5 ml-3" style="width: 900px; font-size: 25px">
     <div class="two-col-grid-text">Date</div><div class="two-col-grid-text">Event</div>
 
     {% for event in book.events %}
-    <div class="two-col-grid-text">{{event.when|date:"Y-m-d H:i" }}</div><div class="two-col-grid-text">{{event}}</div>
+    <div class="two-col-grid-text">{{event.when|date:"Y-m-d H:i" }}</div>
+    {% if event.page_equivalent == 0 %}
+    <div class="two-col-grid-text">
+        <div class="progress" style="width: 100%; height: 50px; font-size: 25px;">
+            <div class="progress-bar bg-danger ml-2" role="progressbar" style="width: 0%"></div>
+        </div>
+    </div>
+    {% elif event.progress_percent == 100 %}
+    <div class="two-col-grid-text">
+        <div class="progress" style="width: 100%; height: 50px; font-size: 25px;">
+            <div class="progress-bar bg-success ml-0" role="progressbar" style="width: 100%">
+                {{event.page_equivalent}}</div>
+        </div>
+    </div>
+    {% else %}
+    <div class="two-col-grid-text">
+        <div class="progress" style="width: 100%; height: 50px; font-size: 25px;">
+            <div class="progress-bar bg-primary ml-2" role="progressbar" style="width: {{event.progress_percent}}%">
+                {{event.page_equivalent}}</div>
+        </div>
+    </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

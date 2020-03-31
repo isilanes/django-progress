@@ -187,6 +187,10 @@ class PageUpdateEvent(Event):
     def page_equivalent(self):
         return self.pages_read
 
+    @property
+    def progress_percent(self):
+        return 100. * self.pages_read / self.book.pages
+
     # Special methods:
     def __str__(self):
         return f"{self.pages_read} pages read on '{self.book}'"
@@ -200,6 +204,7 @@ class BookStartEvent(Event):
 
     # Class properties:
     page_equivalent = 0
+    progress_percent = 0
 
     # Special methods:
     def __str__(self):
@@ -211,6 +216,9 @@ class BookStartEvent(Event):
 
 class BookEndEvent(Event):
     """The event of finishing reading a book."""
+
+    # Class properties:
+    progress_percent = 100
 
     # Public properties:
     @property

@@ -159,7 +159,7 @@ input.submit {
 
 .book-detail-grid {
     display: grid;
-    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-columns: 0.3fr 0.7fr;
     justify-items: center;
     grid-gap: 10px;
     font-size: 35px;
