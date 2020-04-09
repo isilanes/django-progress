@@ -4,10 +4,14 @@
 <div class="banner index-color">Start reading a book</div>
 {% include "books/top_menu.html" %}
 
-<br>
+<form action="{% url 'books:start_book' %}" method="post" class="ml-3">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="submit" value="Submit">
+</form>
 
-<div class="saga-grid">
-    {% for book in unread_books %}
+<div class="saga-grid mt-2 ml-2 mr-2">
+    {% for book in matching_books %}
     <div class="{{book.status}}">
         <a href="{% url 'books:update_book_progress' book.id %}" style="color: #111111;">{{book}}</a>
     </div>

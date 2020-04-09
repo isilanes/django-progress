@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from . import statistics
 from .models import Book, Author, BookStartEvent, Saga, BookEndEvent
-from .forms import BookForm, AddBookForm
+from .forms import BookForm, AddBookForm, SearchBookForm
 
 
 def index(request):
@@ -207,11 +207,10 @@ def modify_book(request, book_id=None):
 def start_book(request):
     """View to start reading a book."""
 
-    context = {
-        "unread_books": [b for b in Book.objects.filter(owned=True) if not b.is_already_read],
-    }
-
-    return render(request, "books/start_book.html", context)
+    if request.method == "POST":
+        return handle_start_reading_post(request)
+    else:
+        return handle_start_reading_get(request)
 
 
 def mark_book_read(request, book_id):
@@ -363,3 +362,30 @@ def missing_sagas():
     """Sagas with one or more books missing."""
 
     return [s for s in Saga.objects.all() if not s.completed and not s.owned]
+
+
+def handle_start_reading_post(request):
+    form = SearchBookForm(request.POST or None)
+
+    if form.is_valid():
+        search_for = form.cleaned_data.get("search_for")
+        matching_books = Book.objects.filter(title__icontains=search_for)
+
+        context = {
+            "form": SearchBookForm(initial={"search_for": ""}),
+            "matching_books": matching_books,
+        }
+
+        return render(request, "books/start_book.html", context)
+
+    else:
+        return handle_start_reading_get(request)
+
+
+def handle_start_reading_get(request):
+    context = {
+        "form": SearchBookForm(initial={"search_for": ""}),
+        "matching_books": Book.objects.none(),
+    }
+
+    return render(request, "books/start_book.html", context)
