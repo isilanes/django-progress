@@ -87,11 +87,17 @@ AVAILABLE_DATABASES = {
     'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': conf_dict.get("DBFILE"),
-    }
+    },
+    'local-pg': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django-progress',
+        'USER': 'books',
+        'PASSWORD': conf_dict.get("DB_PASSWORD"),
+    },
 }
 DATABASES = {}
 
-if conf_dict.get("WHICH_DB", None):
+if conf_dict.get("WHICH_DB"):
     DATABASES["default"] = AVAILABLE_DATABASES[conf_dict.get("WHICH_DB")]
 else:
     # Heroku: Update database configuration from $DATABASE_URL.
