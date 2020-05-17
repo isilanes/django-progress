@@ -25,6 +25,10 @@
 <a class="btn btn-info btn-lg mt-3 ml-2" href="{% url 'books:mark_book_owned' book.id %}">Mark owned</a>
 {% endif %}
 
+<div class="book-progress-plot">
+    {{plotly_plot|safe}}
+</div>
+
 <div class="book-detail-grid mt-5 ml-3" style="width: 900px; font-size: 25px">
     <div class="two-col-grid-text">Date</div><div class="two-col-grid-text">Event</div>
 

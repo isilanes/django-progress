@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 
-from . import statistics
+from . import core, statistics
 from .models import Book, Author, BookStartEvent, Saga, BookEndEvent
 from .forms import BookForm, AddBookForm, SearchBookForm
 
@@ -37,8 +37,13 @@ def book_detail(request, book_id):
 
     book = Book.objects.get(pk=book_id)
 
+    points = [(event.when, event.page_equivalent) for event in book.events]
+
+    plotly_plot_div = core.get_book_progress_plot(points)
+
     context = {
         "book": book,
+        "plotly_plot": plotly_plot_div,
      }
 
     return render(request, "books/book_detail.html", context)
