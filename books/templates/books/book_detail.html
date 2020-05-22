@@ -25,6 +25,7 @@
 <a class="btn btn-info btn-lg mt-3 ml-2" href="{% url 'books:mark_book_owned' book.id %}">Mark owned</a>
 {% endif %}
 
+{% if plotly_plot %}
 <div class="book-progress-plot">
     {{plotly_plot|safe}}
 </div>
@@ -57,4 +58,5 @@
     {% endif %}
     {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

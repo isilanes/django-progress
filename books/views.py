@@ -39,7 +39,9 @@ def book_detail(request, book_id):
 
     points = [(event.when, event.page_equivalent) for event in book.events]
 
-    plotly_plot_div = core.get_book_progress_plot(points)
+    plotly_plot_div = ""
+    if points:
+        plotly_plot_div = core.get_book_progress_plot(points)
 
     context = {
         "book": book,
