@@ -37,16 +37,27 @@ def book_detail(request, book_id):
 
     book = Book.objects.get(pk=book_id)
 
-    points = [(event.when, event.page_equivalent) for event in book.events]
+    reading = []  # list of (when, pages) for a time read
+    readings = []  # one reading per time read
+    for event in book.events:
+        reading.append((event.when, event.page_equivalent))
+        if event.page_equivalent == book.pages:
+            readings.append(reading)
+            reading = []
+    if reading:
+        readings.append(reading)
 
-    plotly_plot_div = ""
-    if points:
-        plotly_plot_div = core.get_book_progress_plot(points)
+    # Longest reading:
+    longest = None
+    for reading in readings:
+        dt = reading[-1][0] - reading[0][0]
+        if longest is None or dt > longest:
+            longest = dt
 
     context = {
         "book": book,
-        "plotly_plot": plotly_plot_div,
-     }
+        "plotly_plots": [core.get_book_progress_plot(r, longest) for r in readings],
+    }
 
     return render(request, "books/book_detail.html", context)
 
