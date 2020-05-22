@@ -31,11 +31,7 @@
 </div>
 {% endfor %}
 
-{% if plotly_plot %}
-<div class="book-progress-plot">
-    {{plotly_plot|safe}}
-</div>
-
+{% if plotly_plots %}
 <div class="book-detail-grid mt-5 ml-3" style="width: 900px; font-size: 25px">
     <div class="two-col-grid-text">Date</div><div class="two-col-grid-text">Event</div>
 
